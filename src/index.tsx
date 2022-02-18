@@ -4,14 +4,14 @@ import App from "./App";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
-import { DarkTheme } from "./theme/DarkTheme";
+import { Theme } from "./theme/Theme";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <DarkTheme>
+      <Theme>
         <App />
-      </DarkTheme>
+      </Theme>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
