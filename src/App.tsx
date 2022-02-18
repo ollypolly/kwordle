@@ -1,57 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Box, Button, Typography, useTheme } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "./app/hooks";
+import { selectColorMode, setColorMode } from "./features/general/generalSlice";
+import { ColorMode } from "./model/colorMode";
+import { DarkModeSwitch } from "./components/DarkModeSwitch";
 
 function App() {
+  const dispatch = useAppDispatch();
+  const colorMode = useAppSelector(selectColorMode);
+  const theme = useTheme();
+
+  const isDark = colorMode === ColorMode.DARK;
+
+  const themeToSet = isDark ? ColorMode.LIGHT : ColorMode.DARK;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Box sx={{ width: "1100px", margin: "auto" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          padding: theme.spacing(1),
+          margin: theme.spacing(1),
+        }}
+      >
+        <DarkModeSwitch
+          checked={isDark}
+          onChange={() => dispatch(setColorMode(themeToSet))}
+        />
+      </Box>
+
+      <Typography variant="h1" sx={{ textAlign: "center" }}>
+        Kwordle
+      </Typography>
+
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          padding: theme.spacing(1),
+          margin: theme.spacing(1),
+        }}
+      >
+        <Button variant="contained">Submit</Button>
+      </Box>
+    </Box>
   );
 }
 
