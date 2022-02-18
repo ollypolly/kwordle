@@ -2,7 +2,7 @@ import { createTheme } from "@mui/material/styles";
 
 const typography = {
   h1: {
-    fontSize: "1rem",
+    fontSize: "1.5rem",
     fontWeight: 600,
   },
   h2: {
@@ -38,7 +38,7 @@ export const lightTheme = createTheme({
       disabled: "rgba(133,133,133,0.38)",
     },
   },
-  ...typography,
+  typography,
 });
 
 export const darkTheme = createTheme({
@@ -60,5 +60,5 @@ export const darkTheme = createTheme({
       disabled: "rgba(133,133,133,0.38)",
     },
   },
-  ...typography,
+  typography,
 });
