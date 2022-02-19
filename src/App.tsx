@@ -16,7 +16,7 @@ function App() {
   const themeToSet = isDark ? ColorMode.LIGHT : ColorMode.DARK;
 
   return (
-    <Box sx={{ width: "1100px", margin: "auto" }}>
+    <Box sx={{ maxWidth: "1100px", margin: "auto" }}>
       <Box
         sx={{
           display: "flex",
