@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "./app/hooks";
 import { selectColorMode, setColorMode } from "./features/general/generalSlice";
 import { ColorMode } from "./model/colorMode";
 import { DarkModeSwitch } from "./components/DarkModeSwitch";
+import { Logo } from "./components/Logo/Logo";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -31,9 +32,7 @@ function App() {
         />
       </Box>
 
-      <Typography variant="h1" sx={{ textAlign: "center" }}>
-        Kwordle
-      </Typography>
+      <Logo />
 
       <Box
         sx={{
