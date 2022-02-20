@@ -1,9 +1,11 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import React from "react";
 import gameData from "../data/kwalee-data";
-import { GuessMetrics } from "../model/games";
-import { Guess } from "../model/guess";
+import { GameAttributes, GuessMetrics } from "../model/games";
+import { Guess, NumberGuess } from "../model/guess";
 import { Letter } from "./Logo/Letter";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 export type GuessRowProps = {
   index: number;
@@ -24,14 +26,15 @@ export function GuessRow({ guess, index }: GuessRowProps) {
           }}
         >
           <Typography
-            variant="body1"
-            sx={{ width: "140px", textAlign: "center" }}
+            variant="subtitle1"
+            sx={{ width: "140px", textAlign: "center", fontSize: "0.7rem" }}
           >
             Name
           </Typography>
 
           {Object.entries(GuessMetrics).map(([key, value], index) => (
             <Box
+              key={key}
               sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -47,7 +50,16 @@ export function GuessRow({ guess, index }: GuessRowProps) {
                 },
               }}
             >
-              <Typography>{value}</Typography>
+              <Typography
+                sx={{
+                  width: "140px",
+                  textAlign: "center",
+                  fontSize: "0.7rem",
+                }}
+                variant="subtitle1"
+              >
+                {value}
+              </Typography>
             </Box>
           ))}
         </Box>
@@ -57,25 +69,55 @@ export function GuessRow({ guess, index }: GuessRowProps) {
       >
         <Typography
           variant="body1"
-          sx={{ width: "140px", textAlign: "center" }}
+          sx={{ width: "140px", textAlign: "center", fontSize: "0.9rem" }}
         >
           {guess?.name}
         </Typography>
 
-        {Object.entries(GuessMetrics).map(([key, value], index) => (
-          <Letter
-            //@ts-ignore
-            tooltipTitle={
-              //@ts-ignore
-              guess && gameData[guess.name] && gameData[guess.name][key]
-            }
-            key={index}
-            backgroundColor={guess && "#424242"}
-            borderColor={guess ? "#424242" : "#a5a5a5"}
-          >
-            {guess && guess[key as keyof Guess].toString()}
-          </Letter>
-        ))}
+        {Object.entries(GuessMetrics).map(([key, value], index) => {
+          const guessKey = key as keyof GameAttributes;
+          const guessValue =
+            guess && gameData[guess.name] && gameData[guess.name][guessKey];
+
+          const guessCorrectness = guess && guess[guessKey];
+
+          let color = "#424242";
+          let Icon;
+
+          if (
+            guessCorrectness === true ||
+            guessCorrectness === NumberGuess.EQUAL
+          ) {
+            color = "#098b30";
+          } else if (guessCorrectness === false) {
+            color = "#991212";
+          }
+
+          if (guessCorrectness === NumberGuess.HIGHER) {
+            Icon = KeyboardArrowUpIcon;
+          } else if (guessCorrectness === NumberGuess.LOWER) {
+            Icon = KeyboardArrowDownIcon;
+          }
+
+          if (Icon) {
+            color = "#3859a0";
+          }
+
+          return (
+            <Letter
+              tooltipTitle={guessValue}
+              key={index}
+              backgroundColor={guess && color}
+              borderColor={!guess && "#a5a5a5"}
+            >
+              {Icon && (
+                <Icon
+                  sx={{ fontSize: "2.5rem", marginTop: theme.spacing(1) }}
+                />
+              )}
+            </Letter>
+          );
+        })}
       </Box>
     </>
   );
