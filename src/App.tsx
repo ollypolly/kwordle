@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import "./App.css";
-import { Autocomplete, Box, Button, TextField, useTheme } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  Button,
+  IconButton,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { DarkModeSwitch } from "./components/DarkModeSwitch";
 import { Logo } from "./components/Logo/Logo";
 import gameData from "./data/kwalee-data";
-import { Guess } from "./model/guess";
-import { GameID } from "./model/games";
+import { Differences, Guess, NumberGuess } from "./model/guess";
+import { GameID, GuessMetrics } from "./model/games";
 import { useImmer } from "use-immer";
 import { GuessRow } from "./components/GuessRow";
+import IosShareIcon from "@mui/icons-material/IosShare";
 
 const GUESS_LIMIT = 8;
 
@@ -18,7 +27,8 @@ function App() {
   const [selectedGame, setSelectedGame] = useState<GameID | null>(null);
 
   // Select game of the day to guess
-  const gameToGuess = gameData["Draw it"];
+  const gameNameToGuess = "Draw it";
+  const gameToGuess = gameData[gameNameToGuess];
 
   const selectOptions = Object.keys(gameData);
 
@@ -30,8 +40,46 @@ function App() {
     }
 
     if (selectedGame !== null) {
+      const {
+        file_size,
+        is_publishing,
+        contains_3d_in_name,
+        release_date,
+        review_score,
+      } = gameData[selectedGame];
+
+      const {
+        file_size: guessFileSize,
+        is_publishing: guessIsPub,
+        contains_3d_in_name: guessIs3D,
+        release_date: guessReleaseDate,
+        review_score: guessReview,
+      } = gameToGuess;
+
+      const numberGuess = (guess: string | number, target: string | number) => {
+        if (guess > target) {
+          return NumberGuess.HIGHER;
+        } else if (guess < target) {
+          return NumberGuess.LOWER;
+        }
+        return NumberGuess.EQUAL;
+      };
+
+      // Calculate differences
+      const differences: Differences = {
+        file_size: numberGuess(file_size, guessFileSize),
+        is_publishing: is_publishing === guessIsPub,
+        contains_3d_in_name: contains_3d_in_name === guessIs3D,
+        release_date: numberGuess(release_date, guessReleaseDate),
+        review_score: numberGuess(review_score, guessReview),
+      };
+
       setGuesses((draft) => {
-        draft.push({ name: selectedGame, created_on: Date.now() });
+        draft.push({
+          name: selectedGame,
+          created_on: Date.now(),
+          ...differences,
+        });
       });
     }
 
@@ -49,12 +97,15 @@ function App() {
           borderBottom: `2px ${theme.palette.background.paper} solid`,
         }}
       >
-        <Logo />
         <DarkModeSwitch />
+        <Logo />
+        <IconButton>
+          <IosShareIcon />
+        </IconButton>
       </Box>
 
       {Array.from(Array(GUESS_LIMIT).keys()).map((index) => (
-        <GuessRow guess={guesses[index]} key={index} />
+        <GuessRow index={index} guess={guesses[index]} key={index} />
       ))}
 
       <Box
