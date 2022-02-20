@@ -8,7 +8,7 @@ export function Logo() {
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
       {logoLetters.map((letter, index) => (
-        <Letter key={index} color="#e2aa1c">
+        <Letter key={index} backgroundColor="#e2aa1c">
           {letter}
         </Letter>
       ))}

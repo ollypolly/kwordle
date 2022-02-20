@@ -7,6 +7,9 @@ import gameData from "./data/kwalee-data";
 import { Guess } from "./model/guess";
 import { GameID } from "./model/games";
 import { useImmer } from "use-immer";
+import { GuessRow } from "./components/GuessRow";
+
+const GUESS_LIMIT = 8;
 
 function App() {
   const theme = useTheme();
@@ -22,6 +25,10 @@ function App() {
   console.log(guesses);
 
   const addGuess = () => {
+    if (guesses.length >= GUESS_LIMIT) {
+      return;
+    }
+
     if (selectedGame !== null) {
       setGuesses((draft) => {
         draft.push({ name: selectedGame, created_on: Date.now() });
@@ -36,15 +43,19 @@ function App() {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "flex-end",
-          padding: theme.spacing(1),
-          margin: theme.spacing(1),
+          justifyContent: "space-between",
+          padding: theme.spacing(2),
+          marginBottom: theme.spacing(2),
+          borderBottom: `2px ${theme.palette.background.paper} solid`,
         }}
       >
+        <Logo />
         <DarkModeSwitch />
       </Box>
 
-      <Logo />
+      {Array.from(Array(GUESS_LIMIT).keys()).map((index) => (
+        <GuessRow guess={guesses[index]} key={index} />
+      ))}
 
       <Box
         sx={{
