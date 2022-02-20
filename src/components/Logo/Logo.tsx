@@ -6,9 +6,11 @@ export function Logo() {
   const logoLetters = "KWORDLE".split("");
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center" }}>
+    <Box
+      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+    >
       {logoLetters.map((letter, index) => (
-        <Letter key={index} backgroundColor="#e2aa1c">
+        <Letter isLogo={true} key={index} backgroundColor="#e2aa1c">
           {letter}
         </Letter>
       ))}

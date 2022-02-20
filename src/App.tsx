@@ -6,6 +6,7 @@ import {
   Button,
   IconButton,
   TextField,
+  Tooltip,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -87,8 +88,9 @@ function App() {
   };
 
   return (
-    <Box sx={{ maxWidth: "1100px", margin: "auto" }}>
+    <Box component="main" sx={{ maxWidth: "1100px", margin: "auto" }}>
       <Box
+        component="header"
         sx={{
           display: "flex",
           justifyContent: "space-between",
@@ -99,40 +101,44 @@ function App() {
       >
         <DarkModeSwitch />
         <Logo />
-        <IconButton>
-          <IosShareIcon />
-        </IconButton>
+        <Tooltip title="Share your answer">
+          <IconButton>
+            <IosShareIcon />
+          </IconButton>
+        </Tooltip>
       </Box>
 
-      {Array.from(Array(GUESS_LIMIT).keys()).map((index) => (
-        <GuessRow index={index} guess={guesses[index]} key={index} />
-      ))}
+      <Box component="section">
+        {Array.from(Array(GUESS_LIMIT).keys()).map((index) => (
+          <GuessRow index={index} guess={guesses[index]} key={index} />
+        ))}
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          padding: theme.spacing(1),
-          margin: theme.spacing(1),
-        }}
-      >
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          value={selectedGame}
-          options={selectOptions}
-          onChange={(event, newValue) => setSelectedGame(newValue)}
-          sx={{ width: 300, marginRight: theme.spacing(1) }}
-          renderInput={(params) => <TextField {...params} label="Game" />}
-          onKeyPress={(event) => {
-            if (event.key === "Enter") {
-              addGuess();
-            }
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            padding: theme.spacing(1),
+            margin: theme.spacing(1),
           }}
-        />
-        <Button variant="contained" onClick={() => addGuess()}>
-          Submit
-        </Button>
+        >
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            value={selectedGame}
+            options={selectOptions}
+            onChange={(event, newValue) => setSelectedGame(newValue)}
+            sx={{ width: 300, marginRight: theme.spacing(1) }}
+            renderInput={(params) => <TextField {...params} label="Game" />}
+            onKeyPress={(event) => {
+              if (event.key === "Enter") {
+                addGuess();
+              }
+            }}
+          />
+          <Button variant="contained" onClick={() => addGuess()}>
+            Submit
+          </Button>
+        </Box>
       </Box>
     </Box>
   );
