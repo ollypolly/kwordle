@@ -1,0 +1,402 @@
+{
+  "Draw it": {
+    "name": "Draw it",
+    "file_size": "320237568",
+    "release_date": "2019-03-11T04:50:54Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.49965
+  },
+  "Airport Security": {
+    "name": "Airport Security",
+    "file_size": "176775168",
+    "release_date": "2021-10-28T07:00:00Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.58397
+  },
+  "Go Fish!": {
+    "name": "Go Fish!",
+    "file_size": "115036160",
+    "release_date": "2018-07-28T04:46:59Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.51948
+  },
+  "Looper!": {
+    "name": "Looper!",
+    "file_size": "220462080",
+    "release_date": "2018-06-07T20:31:42Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.64227
+  },
+  "Teacher Simulator": {
+    "name": "Teacher Simulator",
+    "file_size": "150252544",
+    "release_date": "2020-07-17T07:00:00Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.6186
+  },
+  "Traffic Cop 3D": {
+    "name": "Traffic Cop 3D",
+    "file_size": "336257024",
+    "release_date": "2021-08-11T07:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.57533
+  },
+  "PLANK!": {
+    "name": "PLANK!",
+    "file_size": "185630720",
+    "release_date": "2018-07-29T17:40:17Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.54628
+  },
+  "Shootout 3D": {
+    "name": "Shootout 3D",
+    "file_size": "188914688",
+    "release_date": "2019-07-18T07:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.53411
+  },
+  "Let's Be Cops 3D": {
+    "name": "Let's Be Cops 3D",
+    "file_size": "324088832",
+    "release_date": "2020-10-05T07:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.57393
+  },
+  "Makeover Studio 3D": {
+    "name": "Makeover Studio 3D",
+    "file_size": "212393984",
+    "release_date": "2021-03-26T07:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.47384
+  },
+  "Rocket Sky!": {
+    "name": "Rocket Sky!",
+    "file_size": "144986112",
+    "release_date": "2018-12-21T06:08:49Z",
+    "contains_3d_in_name": false,
+    "is_publishing": true,
+    "review_score": 4.50699
+  },
+  "Jetpack Jump": {
+    "name": "Jetpack Jump",
+    "file_size": "233553920",
+    "release_date": "2019-05-13T19:45:05Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.45754
+  },
+  "Bake it": {
+    "name": "Bake it",
+    "file_size": "213430272",
+    "release_date": "2020-03-03T08:00:00Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.59441
+  },
+  "Object Hunt": {
+    "name": "Object Hunt",
+    "file_size": "154016768",
+    "release_date": "2020-11-24T08:00:00Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.5976
+  },
+  "Police Pursuit": {
+    "name": "Police Pursuit",
+    "file_size": "117721088",
+    "release_date": "2018-08-22T21:38:26Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.66584
+  },
+  "Line Up: Draw the Criminal": {
+    "name": "Line Up: Draw the Criminal",
+    "file_size": "190237696",
+    "release_date": "2020-05-04T07:00:00Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.67028
+  },
+  "Blade Forge 3D": {
+    "name": "Blade Forge 3D",
+    "file_size": "136678400",
+    "release_date": "2020-10-28T07:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.55599
+  },
+  "Skiddy Car": {
+    "name": "Skiddy Car",
+    "file_size": "164333568",
+    "release_date": "2018-10-10T04:40:23Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.57929
+  },
+  "Off the Rails 3D": {
+    "name": "Off the Rails 3D",
+    "file_size": "238049280",
+    "release_date": "2019-11-28T08:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.47405
+  },
+  "Perfect Paint": {
+    "name": "Perfect Paint",
+    "file_size": "187463680",
+    "release_date": "2019-08-23T07:00:00Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.51161
+  },
+  "Drop & Smash": {
+    "name": "Drop & Smash",
+    "file_size": "230797312",
+    "release_date": "2019-10-04T07:00:00Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.66629
+  },
+  "SPILLZ": {
+    "name": "SPILLZ",
+    "file_size": "118679552",
+    "release_date": "2018-03-14T11:20:03Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.45644
+  },
+  "OverTake": {
+    "name": "OverTake",
+    "file_size": "116451328",
+    "release_date": "2019-06-29T16:20:56Z",
+    "contains_3d_in_name": false,
+    "is_publishing": true,
+    "review_score": 4.4098
+  },
+  "Hack Computer": {
+    "name": "Hack Computer",
+    "file_size": "310927360",
+    "release_date": "2021-07-16T07:00:00Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.5942
+  },
+  "Crazy Shopping": {
+    "name": "Crazy Shopping",
+    "file_size": "224483328",
+    "release_date": "2019-09-22T07:00:00Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.6581
+  },
+  "Submarine Jump!": {
+    "name": "Submarine Jump!",
+    "file_size": "187609088",
+    "release_date": "2019-02-08T18:41:53Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.57861
+  },
+  "Big Battle 3D": {
+    "name": "Big Battle 3D",
+    "file_size": "224471040",
+    "release_date": "2019-11-16T08:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.60198
+  },
+  "Clean Up 3D": {
+    "name": "Clean Up 3D",
+    "file_size": "197167104",
+    "release_date": "2019-06-01T12:18:10Z",
+    "contains_3d_in_name": true,
+    "is_publishing": true,
+    "review_score": 4.56376
+  },
+  "TENS!": {
+    "name": "TENS!",
+    "file_size": "170077184",
+    "release_date": "2017-08-30T14:47:44Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.5224
+  },
+  "Perfect Smile": {
+    "name": "Perfect Smile",
+    "file_size": "230132736",
+    "release_date": "2021-07-13T07:00:00Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.53712
+  },
+  "Hook and Smash": {
+    "name": "Hook and Smash",
+    "file_size": "188843008",
+    "release_date": "2020-03-06T08:00:00Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.56468
+  },
+  "Sharpshooter Blitz": {
+    "name": "Sharpshooter Blitz",
+    "file_size": "160691200",
+    "release_date": "2020-06-03T07:00:00Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.64655
+  },
+  "Drill Master": {
+    "name": "Drill Master",
+    "file_size": "164492288",
+    "release_date": "2018-10-19T09:31:53Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.60027
+  },
+  "Doodle Run": {
+    "name": "Doodle Run",
+    "file_size": "291991552",
+    "release_date": "2020-04-02T07:00:00Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.56629
+  },
+  "Flip Tumbling": {
+    "name": "Flip Tumbling",
+    "file_size": "229683200",
+    "release_date": "2019-08-18T07:00:00Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.65883
+  },
+  "Baseball Fury 3D": {
+    "name": "Baseball Fury 3D",
+    "file_size": "225436672",
+    "release_date": "2019-05-29T16:22:07Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.6377
+  },
+  "Sneak Thief 3D": {
+    "name": "Sneak Thief 3D",
+    "file_size": "216285184",
+    "release_date": "2020-05-21T07:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.63603
+  },
+  "Hero Strike 3D": {
+    "name": "Hero Strike 3D",
+    "file_size": "233115648",
+    "release_date": "2020-06-02T07:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.66198
+  },
+  "Hiring Job 3D": {
+    "name": "Hiring Job 3D",
+    "file_size": "169347072",
+    "release_date": "2020-12-10T08:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.44996
+  },
+  "Go Fish: Jurassic Pond": {
+    "name": "Go Fish: Jurassic Pond",
+    "file_size": "189647872",
+    "release_date": "2018-10-12T09:22:27Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.59088
+  },
+  "Police Story 3D": {
+    "name": "Police Story 3D",
+    "file_size": "220448768",
+    "release_date": "2021-02-08T08:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.49516
+  },
+  "Blast City 3D": {
+    "name": "Blast City 3D",
+    "file_size": "243947520",
+    "release_date": "2020-08-28T07:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.57692
+  },
+  "Wheel Race": {
+    "name": "Wheel Race",
+    "file_size": "214386688",
+    "release_date": "2020-06-15T07:00:00Z",
+    "contains_3d_in_name": false,
+    "is_publishing": false,
+    "review_score": 4.54771
+  },
+  "Build it 3D": {
+    "name": "Build it 3D",
+    "file_size": "144119808",
+    "release_date": "2021-01-14T08:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.44139
+  },
+  "Build Your Vehicle": {
+    "name": "Build Your Vehicle",
+    "file_size": "354338816",
+    "release_date": "2021-12-10T08:00:00Z",
+    "contains_3d_in_name": false,
+    "is_publishing": true,
+    "review_score": 3.8875
+  },
+  "Mudder Trucker 3D": {
+    "name": "Mudder Trucker 3D",
+    "file_size": "171307008",
+    "release_date": "2021-02-18T08:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.2524
+  },
+  "Street Cop 3D": {
+    "name": "Street Cop 3D",
+    "file_size": "203432960",
+    "release_date": "2021-12-20T08:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 3.70492
+  },
+  "Off Road Challenge 3D": {
+    "name": "Off Road Challenge 3D",
+    "file_size": "255504384",
+    "release_date": "2021-03-03T08:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.24775
+  },
+  "Car Dealer 3D": {
+    "name": "Car Dealer 3D",
+    "file_size": "187210752",
+    "release_date": "2021-11-29T08:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.12389
+  },
+  "City Cleaner 3D": {
+    "name": "City Cleaner 3D",
+    "file_size": "133188608",
+    "release_date": "2021-03-31T07:00:00Z",
+    "contains_3d_in_name": true,
+    "is_publishing": false,
+    "review_score": 4.6064
+  }
+}
