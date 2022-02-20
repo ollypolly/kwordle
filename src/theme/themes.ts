@@ -34,8 +34,6 @@ export const lightTheme = createTheme({
     },
     text: {
       primary: "rgba(0,0,0,0.87)",
-      secondary: "rgba(220,220,220,0.54)",
-      disabled: "rgba(133,133,133,0.38)",
     },
   },
   typography,
@@ -56,8 +54,6 @@ export const darkTheme = createTheme({
     },
     text: {
       primary: "rgba(255,255,255,0.87)",
-      secondary: "rgba(220,220,220,0.54)",
-      disabled: "rgba(133,133,133,0.38)",
     },
   },
   typography,

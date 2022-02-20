@@ -20,10 +20,21 @@ export function Letter({ color, children }: LetterProps) {
         height: "50px",
         backgroundColor: color,
         padding: theme.spacing(0.5),
+        [theme.breakpoints.down("sm")]: {
+          width: "40px",
+          height: "40px",
+        },
       }}
     >
       <Typography
-        sx={{ alignSelf: "center", fontWeight: 800, fontSize: "1.5rem" }}
+        sx={{
+          alignSelf: "center",
+          fontWeight: 800,
+          fontSize: "1.5rem",
+          [theme.breakpoints.down("sm")]: {
+            fontSize: "1.2rem",
+          },
+        }}
         variant="body1"
       >
         {children}
