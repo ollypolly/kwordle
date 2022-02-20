@@ -1,5 +1,11 @@
 import { FormControlLabel, styled, Switch } from "@mui/material";
 import React from "react";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import {
+  selectColorMode,
+  setColorMode,
+} from "../features/general/generalSlice";
+import { ColorMode } from "../model/colorMode";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -48,16 +54,18 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export type DarkModeSwitchProps = {
-  checked?: boolean;
-  onChange: () => void;
-};
+export function DarkModeSwitch() {
+  const dispatch = useAppDispatch();
+  const colorMode = useAppSelector(selectColorMode);
 
-export function DarkModeSwitch({ onChange, checked }: DarkModeSwitchProps) {
+  const isDark = colorMode === ColorMode.DARK;
+
+  const themeToSet = isDark ? ColorMode.LIGHT : ColorMode.DARK;
+
   return (
     <FormControlLabel
-      checked={checked}
-      onChange={onChange}
+      checked={isDark}
+      onChange={() => dispatch(setColorMode(themeToSet))}
       control={<MaterialUISwitch sx={{ m: 1 }} />}
       label=""
     />

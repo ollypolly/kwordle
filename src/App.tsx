@@ -1,21 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Autocomplete, Box, Button, TextField, useTheme } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "./app/hooks";
-import { selectColorMode, setColorMode } from "./features/general/generalSlice";
-import { ColorMode } from "./model/colorMode";
 import { DarkModeSwitch } from "./components/DarkModeSwitch";
 import { Logo } from "./components/Logo/Logo";
-import gameData from "./data/kwalee-data.json";
+import gameData from "./data/kwalee-data";
+import { Guess } from "./model/guess";
+import { GameID } from "./model/games";
 
 function App() {
-  const dispatch = useAppDispatch();
-  const colorMode = useAppSelector(selectColorMode);
   const theme = useTheme();
 
-  const isDark = colorMode === ColorMode.DARK;
+  const [guesses, setGuesses] = useState<Guess[]>([]);
+  const [selectedGame, setSelectedGame] = useState<GameID | null>(null);
 
-  const themeToSet = isDark ? ColorMode.LIGHT : ColorMode.DARK;
+  const gameToGuess = gameData["Draw it"];
+
+  const selectOptions = Object.keys(gameData);
+
+  console.log(guesses);
+
+  const addGuess = () => {
+    console.log(selectedGame);
+
+    setSelectedGame(null);
+  };
 
   return (
     <Box sx={{ maxWidth: "1100px", margin: "auto" }}>
@@ -27,10 +35,7 @@ function App() {
           margin: theme.spacing(1),
         }}
       >
-        <DarkModeSwitch
-          checked={isDark}
-          onChange={() => dispatch(setColorMode(themeToSet))}
-        />
+        <DarkModeSwitch />
       </Box>
 
       <Logo />
@@ -46,11 +51,20 @@ function App() {
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={Object.keys(gameData)}
+          value={selectedGame}
+          options={selectOptions}
+          onChange={(event, newValue) => setSelectedGame(newValue)}
           sx={{ width: 300, marginRight: theme.spacing(1) }}
           renderInput={(params) => <TextField {...params} label="Game" />}
+          onKeyPress={(event) => {
+            if (event.key === "Enter") {
+              addGuess();
+            }
+          }}
         />
-        <Button variant="contained">Submit</Button>
+        <Button variant="contained" onClick={() => addGuess()}>
+          Submit
+        </Button>
       </Box>
     </Box>
   );
