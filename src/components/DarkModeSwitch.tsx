@@ -5,7 +5,7 @@ import {
   selectColorMode,
   setColorMode,
 } from "../features/general/generalSlice";
-import { ColorMode } from "../model/colorMode";
+import { ColorMode } from "../model/color-mode";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,

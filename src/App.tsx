@@ -6,13 +6,15 @@ import { Logo } from "./components/Logo/Logo";
 import gameData from "./data/kwalee-data";
 import { Guess } from "./model/guess";
 import { GameID } from "./model/games";
+import { useImmer } from "use-immer";
 
 function App() {
   const theme = useTheme();
 
-  const [guesses, setGuesses] = useState<Guess[]>([]);
+  const [guesses, setGuesses] = useImmer<Guess[]>([]);
   const [selectedGame, setSelectedGame] = useState<GameID | null>(null);
 
+  // Select game of the day to guess
   const gameToGuess = gameData["Draw it"];
 
   const selectOptions = Object.keys(gameData);
@@ -20,7 +22,11 @@ function App() {
   console.log(guesses);
 
   const addGuess = () => {
-    console.log(selectedGame);
+    if (selectedGame !== null) {
+      setGuesses((draft) => {
+        draft.push({ name: selectedGame, created_on: Date.now() });
+      });
+    }
 
     setSelectedGame(null);
   };
