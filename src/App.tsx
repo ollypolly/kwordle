@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./App.css";
 import {
   Autocomplete,
   Box,
@@ -57,9 +56,9 @@ function App() {
       } = gameToGuess;
 
       const numberGuess = (guess: string | number, target: string | number) => {
-        if (guess > target) {
+        if (guess < target) {
           return NumberGuess.HIGHER;
-        } else if (guess < target) {
+        } else if (guess > target) {
           return NumberGuess.LOWER;
         }
         return NumberGuess.EQUAL;
