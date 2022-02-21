@@ -3,7 +3,7 @@ import React from "react";
 import gameData from "../data/kwalee-data";
 import { GameAttributes, GuessMetrics } from "../model/games";
 import { Guess, NumberGuess } from "../model/guess";
-import { Letter } from "./Logo/Letter";
+import { Letter } from "./Letter/Letter";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 

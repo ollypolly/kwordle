@@ -1,6 +1,5 @@
 import { Box, Tooltip, Typography, useTheme } from "@mui/material";
 import React, { PropsWithChildren } from "react";
-import "./letter-flip.css";
 
 type LetterProps = {
   backgroundColor?: string;
