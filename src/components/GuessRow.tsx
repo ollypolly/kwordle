@@ -123,7 +123,7 @@ export function GuessRow({ guess, index, gameToGuess }: GuessRowProps) {
           if (key === "alphabetical" && !!guessCorrectness) {
             let prefix =
               guessCorrectness === NumberGuess.EQUAL
-                ? "Equal in the alphabet to"
+                ? "Starts with"
                 : guessCorrectness === NumberGuess.HIGHER
                 ? "Higher in the alphabet than"
                 : "Lower in the alphabet than";
@@ -167,11 +167,13 @@ export function GuessRow({ guess, index, gameToGuess }: GuessRowProps) {
                     height="100%"
                   />
                 ) : (
-                  <img
-                    src={kwaleeHandIcon}
-                    height={60}
-                    alt="Kwalee Hand Logo"
-                  />
+                  guess && (
+                    <img
+                      src={kwaleeHandIcon}
+                      height={60}
+                      alt="Kwalee Hand Logo"
+                    />
+                  )
                 )}
               </Box>
             );
@@ -188,16 +190,18 @@ export function GuessRow({ guess, index, gameToGuess }: GuessRowProps) {
           return (
             <Flippable
               key={guessIndex}
-              startFlip={flipIndex !== undefined && flipIndex >= guessIndex}
+              startFlip={
+                guess && flipIndex !== undefined && flipIndex >= guessIndex
+              }
             >
               <Box sx={{ width: "60px", height: "60px" }} className="back">
                 <Letter
                   tooltipTitle={tooltipVal}
-                  backgroundColor={guess && color}
-                  borderColor={!guess && "#a5a5a5"}
+                  backgroundColor={guess ? color : "#7979795e"}
+                  borderColor={!guess && "#a5a5a55e"}
                   isText={key !== "name"}
                 >
-                  {Icon && (
+                  {guess && Icon && (
                     <Icon
                       sx={{
                         color: "#fff",
