@@ -4,8 +4,10 @@ import {
   Box,
   Button,
   IconButton,
+  Link,
   TextField,
   Tooltip,
+  Typography,
   useTheme,
 } from "@mui/material";
 import { DarkModeSwitch } from "./components/DarkModeSwitch";
@@ -142,6 +144,24 @@ function App() {
                 key={index}
               />
             ))}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                margin: theme.spacing(2),
+              }}
+            >
+              <Typography variant="subtitle2">
+                Need a hint? Check out{" "}
+                <Link
+                  target="_blank"
+                  href="https://play.google.com/store/apps/collection/cluster?clp=igM4ChkKEzUwOTU0OTAzODk2ODY1MjkyMTkQCBgDEhkKEzUwOTU0OTAzODk2ODY1MjkyMTkQCBgDGAA%3D:S:ANO1ljIziXY&gsr=CjuKAzgKGQoTNTA5NTQ5MDM4OTY4NjUyOTIxORAIGAMSGQoTNTA5NTQ5MDM4OTY4NjUyOTIxORAIGAMYAA%3D%3D:S:ANO1ljJbroU&hl=en_GB&gl=US"
+                >
+                  Kwalee
+                </Link>{" "}
+                on the Google Play Store
+              </Typography>
+            </Box>
           </Box>
         </Box>
 
