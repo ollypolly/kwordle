@@ -29,7 +29,9 @@ function App() {
   const gameNameToGuess = "Draw it";
   const gameToGuess = gameData[gameNameToGuess];
 
-  const selectOptions = Object.keys(gameData);
+  const selectOptions = Object.keys(gameData).sort((a, b) =>
+    a.localeCompare(b)
+  );
 
   console.log(guesses);
 
