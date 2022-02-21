@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import React from "react";
 import gameData from "../data/kwalee-data";
-import { GameAttributes, GuessMetrics } from "../model/games";
+import { GuessMetrics } from "../model/games";
 import { Differences, Guess, NumberGuess } from "../model/guess";
 import { Letter } from "./Letter/Letter";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
