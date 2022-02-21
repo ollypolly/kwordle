@@ -1,6 +1,6 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import gameData from "../data/kwalee-data";
+import gameData from "../data/play-store-data";
 import { GuessMetrics } from "../model/games";
 import { Differences, Guess, NumberGuess } from "../model/guess";
 import { Letter } from "./Letter/Letter";
@@ -90,6 +90,10 @@ export function GuessRow({ guess, index }: GuessRowProps) {
               tooltipVal = moment(tooltipVal?.toString()).format("MMM Do YYYY");
             } else if (key === "file_size") {
               tooltipVal = `${tooltipVal} MB`;
+            } else if (key === "downloads") {
+              tooltipVal = `${tooltipVal
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}+`;
             }
           }
 
