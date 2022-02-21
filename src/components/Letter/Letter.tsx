@@ -26,7 +26,7 @@ export function Letter({
           display: "flex",
           justifyContent: "center",
           flexGrow: 0,
-          margin: theme.spacing(0.5),
+
           width: "60px",
           height: "60px",
           backgroundColor: backgroundColor,

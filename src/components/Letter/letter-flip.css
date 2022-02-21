@@ -3,18 +3,14 @@
   perspective: 1000;
 }
 /* flip the pane when hovered */
-
 .flip-container.flip-this .flipper {
   transform: rotateX(180deg);
 }
 
-.flip-container,
-.front,
-.back {
-}
-
 /* flip speed goes here */
 .flipper {
+  transform-origin: 100% 30px; /* half of height */
+
   transition: 1s;
   transform-style: preserve-3d;
 
@@ -40,5 +36,5 @@
 
 /* back, initially hidden pane */
 .back {
-  transform: rotateX(180deg);
+  transform: rotateY(180deg);
 }

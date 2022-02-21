@@ -108,17 +108,26 @@ export function GuessRow({ guess, index }: GuessRowProps) {
 
           return (
             <Flippable key={index} startFlip={!!guess}>
-              <Letter
-                tooltipTitle={tooltipVal}
-                backgroundColor={guess && color}
-                borderColor={!guess && "#a5a5a5"}
-              >
-                {Icon && (
-                  <Icon
-                    sx={{ fontSize: "2.5rem", marginTop: theme.spacing(1) }}
-                  />
-                )}
-              </Letter>
+              <Box sx={{ width: "60px", height: "60px" }} className="back">
+                <Letter
+                  tooltipTitle={tooltipVal}
+                  backgroundColor={guess && color}
+                  borderColor={!guess && "#a5a5a5"}
+                >
+                  {Icon && (
+                    <Icon
+                      sx={{
+                        transform: "rotateX(180deg)",
+                        fontSize: "2.5rem",
+                        marginTop: theme.spacing(1),
+                      }}
+                    />
+                  )}
+                </Letter>
+              </Box>
+              <Box sx={{ width: "60px", height: "60px" }} className="front">
+                <Letter tooltipTitle={tooltipVal} borderColor={"#a5a5a5"} />
+              </Box>
             </Flippable>
           );
         })}
