@@ -6,6 +6,7 @@ type LetterProps = {
   borderColor?: string;
   tooltipTitle?: string;
   isLogo?: boolean;
+  color?: string;
 } & PropsWithChildren<any>;
 
 export function Letter({
@@ -14,6 +15,7 @@ export function Letter({
   children,
   tooltipTitle = "",
   isLogo,
+  color,
 }: LetterProps) {
   const theme = useTheme();
 
@@ -25,8 +27,8 @@ export function Letter({
           justifyContent: "center",
           flexGrow: 0,
           margin: theme.spacing(0.5),
-          width: "50px",
-          height: "50px",
+          width: "60px",
+          height: "60px",
           backgroundColor: backgroundColor,
           border: `2px ${borderColor} solid`,
           padding: theme.spacing(0.5),
@@ -36,8 +38,11 @@ export function Letter({
             margin: theme.spacing(0.3),
           }),
           [theme.breakpoints.down("sm")]: {
-            width: "40px",
-            height: "40px",
+            ...(isLogo && {
+              width: "25px",
+              height: "25px",
+              margin: theme.spacing(0.2),
+            }),
           },
         }}
       >
@@ -46,12 +51,10 @@ export function Letter({
             alignSelf: "center",
             fontWeight: 800,
             fontSize: "1.5rem",
+            color,
             ...(isLogo && {
               fontSize: "1rem",
             }),
-            [theme.breakpoints.down("sm")]: {
-              fontSize: "1.2rem",
-            },
           }}
           variant="body1"
         >

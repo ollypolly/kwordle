@@ -25,12 +25,12 @@ export function GuessRow({ guess, index }: GuessRowProps) {
             alignItems: "center",
           }}
         >
-          <Typography
+          {/* <Typography
             variant="subtitle1"
             sx={{ width: "140px", textAlign: "center", fontSize: "0.7rem" }}
           >
             Name
-          </Typography>
+          </Typography> */}
 
           {Object.entries(GuessMetrics).map(([key, value], index) => (
             <Box
@@ -41,13 +41,9 @@ export function GuessRow({ guess, index }: GuessRowProps) {
                 alignContent: "center",
                 flexGrow: 0,
                 margin: theme.spacing(0.5),
-                width: "50px",
-                height: "50px",
+                width: "60px",
+                height: "60px",
                 padding: theme.spacing(0.5),
-                [theme.breakpoints.down("sm")]: {
-                  width: "40px",
-                  height: "40px",
-                },
               }}
             >
               <Typography
@@ -67,17 +63,23 @@ export function GuessRow({ guess, index }: GuessRowProps) {
       <Box
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
-        <Typography
+        {/* <Typography
           variant="body1"
           sx={{ width: "140px", textAlign: "center", fontSize: "0.9rem" }}
         >
           {guess?.name}
-        </Typography>
+        </Typography> */}
 
         {Object.entries(GuessMetrics).map(([key, value], index) => {
           const guessKey = key as keyof GameAttributes;
-          const guessValue =
+          let guessValue =
             guess && gameData[guess.name] && gameData[guess.name][guessKey];
+
+          if (guessValue === true) {
+            guessValue = "Both your guess, and the correct answer align";
+          } else if (guessValue === false) {
+            guessValue = "The correct answer does not align with your answer";
+          }
 
           const guessCorrectness = guess && guess[guessKey];
 
@@ -88,9 +90,9 @@ export function GuessRow({ guess, index }: GuessRowProps) {
             guessCorrectness === true ||
             guessCorrectness === NumberGuess.EQUAL
           ) {
-            color = "#098b30";
+            color = "#418154";
           } else if (guessCorrectness === false) {
-            color = "#991212";
+            color = "#883434";
           }
 
           if (guessCorrectness === NumberGuess.HIGHER) {
