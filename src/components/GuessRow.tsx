@@ -81,7 +81,7 @@ export function GuessRow({ guess, index }: GuessRowProps) {
           const guessCorrectness = guess && guess[guessKey];
 
           if (guessCorrectness === true) {
-            tooltipVal = "Both your guess, and the correct answer align";
+            tooltipVal = "Your guess aligns with the correct answer";
           } else if (guessCorrectness === false) {
             tooltipVal = "The correct answer does not align with your answer";
           }

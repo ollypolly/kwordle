@@ -14,9 +14,9 @@ export type GameAttributes = {
 
 export const GuessMetrics: Record<string, string> = {
   name: "Game",
-  release_date: "Released",
-  contains_3d_in_name: "3D",
+  release_date: "Release date",
+  contains_3d_in_name: "3D in name",
   is_publishing: "Publishing",
-  review_score: "iOS Score",
+  review_score: "iOS score",
   file_size: "File size",
 };
