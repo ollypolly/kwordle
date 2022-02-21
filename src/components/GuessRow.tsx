@@ -87,7 +87,9 @@ export function GuessRow({ guess, index }: GuessRowProps) {
           }
 
           if (key === "release_date") {
-            tooltipVal = moment(tooltipVal?.toString()).format("MMM Do YYYY");
+            if (tooltipVal) {
+              tooltipVal = moment(tooltipVal?.toString()).format("MMM Do YYYY");
+            }
           } else if (key === "file_size") {
             tooltipVal = `${tooltipVal} MB`;
           }
