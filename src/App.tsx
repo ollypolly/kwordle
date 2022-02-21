@@ -26,7 +26,7 @@ function App() {
   const [selectedGame, setSelectedGame] = useState<GameID | null>(null);
 
   // Select game of the day to guess
-  const gameNameToGuess = "Draw it";
+  const gameNameToGuess = "Jetpack Jump";
   const gameToGuess = gameData[gameNameToGuess];
 
   const selectOptions = Object.keys(gameData).sort((a, b) =>
