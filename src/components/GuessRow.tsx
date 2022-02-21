@@ -75,13 +75,13 @@ export function GuessRow({ guess, index }: GuessRowProps) {
           let guessValue =
             guess && gameData[guess.name] && gameData[guess.name][guessKey];
 
-          if (guessValue === true) {
-            guessValue = "Both your guess, and the correct answer align";
-          } else if (guessValue === false) {
-            guessValue = "The correct answer does not align with your answer";
-          }
-
+          let tooltipVal = guessValue;
           const guessCorrectness = guess && guess[guessKey];
+          if (guessCorrectness === true) {
+            tooltipVal = "Both your guess, and the correct answer align";
+          } else if (guessCorrectness === false) {
+            tooltipVal = "The correct answer does not align with your answer";
+          }
 
           let color = "#424242";
           let Icon;
@@ -107,7 +107,7 @@ export function GuessRow({ guess, index }: GuessRowProps) {
 
           return (
             <Letter
-              tooltipTitle={guessValue}
+              tooltipTitle={tooltipVal}
               key={index}
               backgroundColor={guess && color}
               borderColor={!guess && "#a5a5a5"}

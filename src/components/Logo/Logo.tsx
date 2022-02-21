@@ -11,14 +11,19 @@ export function Logo() {
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
       {logoLetters.map((letter, index) => (
-        <Letter
-          isLogo={true}
-          key={index}
-          backgroundColor={theme.palette.primary.main}
-          color="#000"
-        >
-          {letter}
-        </Letter>
+        <Box className="flip-container">
+          <Box className="flipper">
+            <Letter
+              className="back"
+              isLogo={true}
+              key={index}
+              backgroundColor={theme.palette.primary.main}
+              color="#000"
+            >
+              {letter}
+            </Letter>
+          </Box>
+        </Box>
       ))}
     </Box>
   );
