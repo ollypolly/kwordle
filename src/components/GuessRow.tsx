@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import React from "react";
 import gameData from "../data/kwalee-data";
-import { GameAttributes, GuessMetrics } from "../model/games";
+import { GuessMetrics } from "../model/games";
 import { Differences, Guess, NumberGuess } from "../model/guess";
 import { Letter } from "./Letter/Letter";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -87,7 +87,9 @@ export function GuessRow({ guess, index }: GuessRowProps) {
           }
 
           if (key === "release_date") {
-            tooltipVal = moment(tooltipVal?.toString()).format("MMM Do YYYY");
+            if (tooltipVal) {
+              tooltipVal = moment(tooltipVal?.toString()).format("MMM Do YYYY");
+            }
           } else if (key === "file_size") {
             tooltipVal = `${tooltipVal} MB`;
           }
