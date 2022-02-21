@@ -169,6 +169,11 @@ function App() {
           }}
         >
           <Box>
+            <Box sx={{ margin: theme.spacing(2), textAlign: "center" }}>
+              <Typography variant="subtitle2">
+                Game Mode: {gameNameToGuess === dailyGame ? "Daily" : "Random"}
+              </Typography>
+            </Box>
             {Array.from(Array(GUESS_LIMIT).keys()).map((index) => (
               <GuessRow
                 gameToGuess={gameToGuess}
@@ -196,16 +201,6 @@ function App() {
                 </Link>{" "}
                 on the Google Play Store
               </Typography>
-              <Box sx={{ margin: theme.spacing(2) }}>
-                <Button
-                  onClick={() => pickRandom()}
-                  color="secondary"
-                  size="small"
-                  variant="outlined"
-                >
-                  Random
-                </Button>
-              </Box>
             </Box>
           </Box>
         </Box>
@@ -234,6 +229,16 @@ function App() {
           />
           <Button variant="contained" onClick={() => addGuess()}>
             Submit
+          </Button>
+        </Box>
+        <Box sx={{ margin: theme.spacing(2), alignSelf: "center" }}>
+          <Button
+            onClick={() => pickRandom()}
+            color="secondary"
+            size="small"
+            variant="outlined"
+          >
+            New Game
           </Button>
         </Box>
       </Box>
