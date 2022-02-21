@@ -135,7 +135,12 @@ function App() {
         >
           <Box>
             {Array.from(Array(GUESS_LIMIT).keys()).map((index) => (
-              <GuessRow index={index} guess={guesses[index]} key={index} />
+              <GuessRow
+                gameToGuess={gameToGuess}
+                index={index}
+                guess={guesses[index]}
+                key={index}
+              />
             ))}
           </Box>
         </Box>
