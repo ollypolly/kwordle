@@ -3,9 +3,10 @@ import React from "react";
 import gameData from "../data/kwalee-data";
 import { GameAttributes, GuessMetrics } from "../model/games";
 import { Guess, NumberGuess } from "../model/guess";
-import { Letter } from "./Logo/Letter";
+import { Letter } from "./Letter/Letter";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Flippable } from "./Letter/Flippable";
 
 export type GuessRowProps = {
   index: number;
@@ -75,13 +76,13 @@ export function GuessRow({ guess, index }: GuessRowProps) {
           let guessValue =
             guess && gameData[guess.name] && gameData[guess.name][guessKey];
 
-          if (guessValue === true) {
-            guessValue = "Both your guess, and the correct answer align";
-          } else if (guessValue === false) {
-            guessValue = "The correct answer does not align with your answer";
-          }
-
+          let tooltipVal = guessValue;
           const guessCorrectness = guess && guess[guessKey];
+          if (guessCorrectness === true) {
+            tooltipVal = "Both your guess, and the correct answer align";
+          } else if (guessCorrectness === false) {
+            tooltipVal = "The correct answer does not align with your answer";
+          }
 
           let color = "#424242";
           let Icon;
@@ -106,18 +107,19 @@ export function GuessRow({ guess, index }: GuessRowProps) {
           }
 
           return (
-            <Letter
-              tooltipTitle={guessValue}
-              key={index}
-              backgroundColor={guess && color}
-              borderColor={!guess && "#a5a5a5"}
-            >
-              {Icon && (
-                <Icon
-                  sx={{ fontSize: "2.5rem", marginTop: theme.spacing(1) }}
-                />
-              )}
-            </Letter>
+            <Flippable key={index} startFlip={!!guess}>
+              <Letter
+                tooltipTitle={tooltipVal}
+                backgroundColor={guess && color}
+                borderColor={!guess && "#a5a5a5"}
+              >
+                {Icon && (
+                  <Icon
+                    sx={{ fontSize: "2.5rem", marginTop: theme.spacing(1) }}
+                  />
+                )}
+              </Letter>
+            </Flippable>
           );
         })}
       </Box>
