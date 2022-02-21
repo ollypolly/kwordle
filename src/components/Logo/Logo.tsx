@@ -17,6 +17,7 @@ export function Logo() {
           isLogo={true}
           backgroundColor={theme.palette.primary.main}
           color="#000"
+          isText
         >
           {letter}
         </Letter>
