@@ -30,7 +30,7 @@ export const lightTheme = createTheme({
     },
     background: {
       default: "#fff",
-      paper: "#fff",
+      paper: "#cacaca",
     },
     text: {
       primary: "rgba(0,0,0,0.87)",
