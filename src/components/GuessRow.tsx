@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import gameData from "../data/play-store-data";
-import { GuessMetrics } from "../model/games";
+import { GameAttributes, GuessMetrics } from "../model/games";
 import { Differences, Guess, NumberGuess } from "../model/guess";
 import { Letter } from "./Letter/Letter";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -73,11 +73,12 @@ export function GuessRow({ guess, index }: GuessRowProps) {
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
         {Object.entries(GuessMetrics).map(([key, value], guessIndex) => {
-          const guessKey = key as keyof Differences;
+          const guessKey = key as keyof GameAttributes;
           let guessValue =
             guess && gameData[guess.name] && gameData[guess.name][guessKey];
 
           let tooltipVal = guessValue;
+          //@ts-ignore
           const guessCorrectness = guess && guess[guessKey];
 
           if (guessCorrectness === true) {
@@ -86,15 +87,21 @@ export function GuessRow({ guess, index }: GuessRowProps) {
             tooltipVal = "The correct answer does not align with your answer";
           }
           if (tooltipVal) {
-            if (key === "release_date") {
-              tooltipVal = moment(tooltipVal?.toString()).format("MMM Do YYYY");
-            } else if (key === "file_size") {
+            if (key === "file_size") {
               tooltipVal = `${tooltipVal} MB`;
             } else if (key === "downloads") {
               tooltipVal = `${tooltipVal
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}+`;
             }
+          }
+
+          if (key === "alphabetical") {
+            let prefix =
+              guessCorrectness === NumberGuess.HIGHER
+                ? "Higher in the alphabet than"
+                : "Lower in the alphabet than";
+            tooltipVal = `${prefix} ${guess?.name.charAt(0)}`;
           }
 
           let color = "#424242";
