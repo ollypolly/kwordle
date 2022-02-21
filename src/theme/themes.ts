@@ -36,7 +36,13 @@ export const lightTheme = createTheme({
       primary: "rgba(0,0,0,0.87)",
     },
   },
-  typography,
+  typography: {
+    ...typography,
+    subtitle2: {
+      ...typography.subtitle2,
+      color: "#00000075",
+    },
+  },
 });
 
 export const darkTheme = createTheme({
@@ -56,5 +62,11 @@ export const darkTheme = createTheme({
       primary: "rgba(255,255,255,0.87)",
     },
   },
-  typography,
+  typography: {
+    ...typography,
+    subtitle2: {
+      ...typography.subtitle2,
+      color: "#ffffff73",
+    },
+  },
 });
