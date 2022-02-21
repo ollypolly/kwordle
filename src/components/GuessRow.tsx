@@ -200,6 +200,7 @@ export function GuessRow({ guess, index, gameToGuess }: GuessRowProps) {
                   {Icon && (
                     <Icon
                       sx={{
+                        color: "#fff",
                         transform: "rotateX(180deg)",
                         fontSize: "2.5rem",
                       }}
