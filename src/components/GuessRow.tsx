@@ -123,7 +123,7 @@ export function GuessRow({ guess, index, gameToGuess }: GuessRowProps) {
           if (key === "alphabetical" && !!guessCorrectness) {
             let prefix =
               guessCorrectness === NumberGuess.EQUAL
-                ? "Equal in the alphabet to"
+                ? "Starts with"
                 : guessCorrectness === NumberGuess.HIGHER
                 ? "Higher in the alphabet than"
                 : "Lower in the alphabet than";
