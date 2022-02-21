@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { ColorMode } from "../../model/colorMode";
+import { ColorMode } from "../../model/color-mode";
 
 export interface GeneralState {
   colorMode: ColorMode;
