@@ -49,9 +49,21 @@ function App() {
   const dayNumber = dayOfYear(new Date());
 
   // Select game of the day to guess
-  const gameNameToGuess = output[dayNumber];
+  const dailyGame = output[dayNumber];
+  const [gameNameToGuess, setGameNameToGuess] = useState(dailyGame);
+
   console.log(`Answer: ${gameNameToGuess}`);
   const gameToGuess = gameData[gameNameToGuess];
+
+  const pickRandom = () => {
+    const random = Math.floor(Math.random() * selectOptions.length);
+
+    // Set random game
+    setGameNameToGuess(selectOptions[random]);
+
+    // Clear guesses
+    setGuesses([]);
+  };
 
   const addGuess = () => {
     if (guesses.length >= GUESS_LIMIT) {
@@ -168,7 +180,9 @@ function App() {
             <Box
               sx={{
                 display: "flex",
+                flexDirection: "column",
                 justifyContent: "center",
+                alignItems: "center",
                 margin: theme.spacing(2),
               }}
             >
@@ -182,6 +196,16 @@ function App() {
                 </Link>{" "}
                 on the Google Play Store
               </Typography>
+              <Box sx={{ margin: theme.spacing(2) }}>
+                <Button
+                  onClick={() => pickRandom()}
+                  color="secondary"
+                  size="small"
+                  variant="outlined"
+                >
+                  Random
+                </Button>
+              </Box>
             </Box>
           </Box>
         </Box>
