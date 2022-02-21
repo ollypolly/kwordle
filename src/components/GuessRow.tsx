@@ -7,6 +7,7 @@ import { Letter } from "./Letter/Letter";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Flippable } from "./Letter/Flippable";
+import kwaleeHandIcon from "../img/Kwalee-Hand-White-Logo.png";
 
 export type GuessRowProps = {
   index: number;
@@ -147,6 +148,9 @@ export function GuessRow({ guess, index, gameToGuess }: GuessRowProps) {
           } else if (guessCorrectness === NumberGuess.LOWER) {
             Icon = KeyboardArrowDownIcon;
           } else if (key === "name") {
+            const iconUrl =
+              guess && gameData[guess.name] && gameData[guess.name].icon;
+
             Icon = () => (
               <Box
                 sx={{
@@ -155,20 +159,30 @@ export function GuessRow({ guess, index, gameToGuess }: GuessRowProps) {
                   transform: "rotateX(180deg)",
                 }}
               >
-                <img
-                  src={
-                    guess && gameData[guess.name] && gameData[guess.name].icon
-                  }
-                  alt="App Icon"
-                  width="100%"
-                  height="100%"
-                />
+                {iconUrl ? (
+                  <img
+                    src={iconUrl}
+                    alt="App Icon"
+                    width="100%"
+                    height="100%"
+                  />
+                ) : (
+                  <img
+                    src={kwaleeHandIcon}
+                    height={60}
+                    alt="Kwalee Hand Logo"
+                  />
+                )}
               </Box>
             );
           }
 
           if (Icon) {
             color = "#2d55ac";
+          }
+
+          if (key === "name") {
+            color = "#4b4b4b73";
           }
 
           return (
@@ -194,7 +208,7 @@ export function GuessRow({ guess, index, gameToGuess }: GuessRowProps) {
                 </Letter>
               </Box>
               <Box sx={{ width: "60px", height: "60px" }} className="front">
-                <Letter tooltipTitle={tooltipVal} borderColor={"#a5a5a5"} />
+                <Letter tooltipTitle={tooltipVal} borderColor={"#a5a5a55e"} />
               </Box>
             </Flippable>
           );
