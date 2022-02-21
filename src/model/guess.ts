@@ -7,6 +7,7 @@ export type Differences = {
   downloads: NumberGuess;
   release_date: NumberGuess;
   contains_3d_in_name: boolean;
+  alphabetical: NumberGuess;
   review_score: NumberGuess;
 };
 

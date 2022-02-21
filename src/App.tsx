@@ -50,17 +50,30 @@ function App() {
       } = gameToGuess;
 
       const numberGuess = (guess: string | number, target: string | number) => {
-        if (guess < target) {
-          return NumberGuess.HIGHER;
-        } else if (guess > target) {
-          return NumberGuess.LOWER;
+        if (typeof guess === "string" && typeof target === "string") {
+          if (guess.localeCompare(target) < 0) {
+            return NumberGuess.HIGHER;
+          } else if (guess.localeCompare(target) > 0) {
+            return NumberGuess.LOWER;
+          }
+        } else {
+          if (guess < target) {
+            return NumberGuess.HIGHER;
+          } else if (guess > target) {
+            return NumberGuess.LOWER;
+          }
         }
+
         return NumberGuess.EQUAL;
       };
 
       // Calculate differences
       const differences: Differences = {
         downloads: numberGuess(downloads, guessDownloadsSize),
+        alphabetical: numberGuess(
+          gameNameToGuess.charAt(0),
+          selectedGame.charAt(0)
+        ),
         contains_3d_in_name: contains_3d_in_name === guessIs3D,
         release_date: numberGuess(release_date, guessReleaseDate),
         review_score: numberGuess(review_score, guessReview),
