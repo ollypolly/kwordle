@@ -6,6 +6,7 @@ import { Guess, NumberGuess } from "../model/guess";
 import { Letter } from "./Letter/Letter";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Flippable } from "./Letter/Flippable";
 
 export type GuessRowProps = {
   index: number;
@@ -106,18 +107,19 @@ export function GuessRow({ guess, index }: GuessRowProps) {
           }
 
           return (
-            <Letter
-              tooltipTitle={tooltipVal}
-              key={index}
-              backgroundColor={guess && color}
-              borderColor={!guess && "#a5a5a5"}
-            >
-              {Icon && (
-                <Icon
-                  sx={{ fontSize: "2.5rem", marginTop: theme.spacing(1) }}
-                />
-              )}
-            </Letter>
+            <Flippable key={index} startFlip={!!guess}>
+              <Letter
+                tooltipTitle={tooltipVal}
+                backgroundColor={guess && color}
+                borderColor={!guess && "#a5a5a5"}
+              >
+                {Icon && (
+                  <Icon
+                    sx={{ fontSize: "2.5rem", marginTop: theme.spacing(1) }}
+                  />
+                )}
+              </Letter>
+            </Flippable>
           );
         })}
       </Box>
