@@ -1,20 +1,21 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import gameData from "../data/kwalee-data";
-import { GuessMetrics } from "../model/games";
-import { Differences, Guess, NumberGuess } from "../model/guess";
+import gameData from "../data/play-store-data";
+import { GameAttributes, GuessMetrics } from "../model/games";
+import { Guess, NumberGuess } from "../model/guess";
 import { Letter } from "./Letter/Letter";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Flippable } from "./Letter/Flippable";
-import moment from "moment";
+import kwaleeHandIcon from "../img/Kwalee-Hand-White-Logo.png";
 
 export type GuessRowProps = {
   index: number;
   guess?: Guess;
+  gameToGuess?: GameAttributes;
 };
 
-export function GuessRow({ guess, index }: GuessRowProps) {
+export function GuessRow({ guess, index, gameToGuess }: GuessRowProps) {
   const theme = useTheme();
 
   const [flipIndex, setFlipIndex] = useState<number | undefined>();
@@ -73,24 +74,61 @@ export function GuessRow({ guess, index }: GuessRowProps) {
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
         {Object.entries(GuessMetrics).map(([key, value], guessIndex) => {
-          const guessKey = key as keyof Differences;
+          const guessKey = key as keyof GameAttributes;
           let guessValue =
             guess && gameData[guess.name] && gameData[guess.name][guessKey];
 
           let tooltipVal = guessValue;
+          //@ts-ignore
           const guessCorrectness = guess && guess[guessKey];
 
           if (guessCorrectness === true) {
-            tooltipVal = "Your guess aligns with the correct answer";
+            if (guess?.name.includes("3D")) {
+              tooltipVal = "Answer and guess include 3D in the name";
+            } else {
+              tooltipVal = "Answer and guess don't include 3D in the name";
+            }
           } else if (guessCorrectness === false) {
-            tooltipVal = "The correct answer does not align with your answer";
+            if (gameToGuess?.name.includes("3D")) {
+              tooltipVal = "Answer includes 3D in the name";
+            } else {
+              tooltipVal = "Answer doesn't include 3D in the name";
+            }
           }
           if (tooltipVal) {
-            if (key === "release_date") {
-              tooltipVal = moment(tooltipVal?.toString()).format("MMM Do YYYY");
-            } else if (key === "file_size") {
-              tooltipVal = `${tooltipVal} MB`;
+            if (key === "downloads" || key === "review_score") {
+              let prefix =
+                guessCorrectness === NumberGuess.EQUAL
+                  ? "Equal to"
+                  : guessCorrectness === NumberGuess.HIGHER
+                  ? "More than"
+                  : "Less than";
+              tooltipVal = `${prefix} ${tooltipVal
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
             }
+
+            if (key === "release_date") {
+              let prefix =
+                guessCorrectness === NumberGuess.EQUAL
+                  ? "Released on"
+                  : guessCorrectness === NumberGuess.HIGHER
+                  ? "Released after"
+                  : "Released before";
+
+              tooltipVal = `${prefix} ${tooltipVal}`;
+            }
+          }
+
+          if (key === "alphabetical" && !!guessCorrectness) {
+            let prefix =
+              guessCorrectness === NumberGuess.EQUAL
+                ? "Equal in the alphabet to"
+                : guessCorrectness === NumberGuess.HIGHER
+                ? "Higher in the alphabet than"
+                : "Lower in the alphabet than";
+
+            tooltipVal = `${prefix} ${guess?.name.charAt(0)}`;
           }
 
           let color = "#424242";
@@ -100,9 +138,9 @@ export function GuessRow({ guess, index }: GuessRowProps) {
             guessCorrectness === true ||
             guessCorrectness === NumberGuess.EQUAL
           ) {
-            color = "#418154";
+            color = "#41a05e";
           } else if (guessCorrectness === false) {
-            color = "#883434";
+            color = "#9e3232";
           }
 
           if (guessCorrectness === NumberGuess.HIGHER) {
@@ -110,6 +148,9 @@ export function GuessRow({ guess, index }: GuessRowProps) {
           } else if (guessCorrectness === NumberGuess.LOWER) {
             Icon = KeyboardArrowDownIcon;
           } else if (key === "name") {
+            const iconUrl =
+              guess && gameData[guess.name] && gameData[guess.name].icon;
+
             Icon = () => (
               <Box
                 sx={{
@@ -118,20 +159,30 @@ export function GuessRow({ guess, index }: GuessRowProps) {
                   transform: "rotateX(180deg)",
                 }}
               >
-                <img
-                  src={
-                    guess && gameData[guess.name] && gameData[guess.name].icon
-                  }
-                  alt="App Icon"
-                  width="100%"
-                  height="100%"
-                />
+                {iconUrl ? (
+                  <img
+                    src={iconUrl}
+                    alt="App Icon"
+                    width="100%"
+                    height="100%"
+                  />
+                ) : (
+                  <img
+                    src={kwaleeHandIcon}
+                    height={60}
+                    alt="Kwalee Hand Logo"
+                  />
+                )}
               </Box>
             );
           }
 
           if (Icon) {
-            color = "#3859a0";
+            color = "#2d55ac";
+          }
+
+          if (key === "name") {
+            color = "#4b4b4b73";
           }
 
           return (
@@ -149,6 +200,7 @@ export function GuessRow({ guess, index }: GuessRowProps) {
                   {Icon && (
                     <Icon
                       sx={{
+                        color: "#fff",
                         transform: "rotateX(180deg)",
                         fontSize: "2.5rem",
                       }}
@@ -157,7 +209,7 @@ export function GuessRow({ guess, index }: GuessRowProps) {
                 </Letter>
               </Box>
               <Box sx={{ width: "60px", height: "60px" }} className="front">
-                <Letter tooltipTitle={tooltipVal} borderColor={"#a5a5a5"} />
+                <Letter tooltipTitle={tooltipVal} borderColor={"#a5a5a55e"} />
               </Box>
             </Flippable>
           );

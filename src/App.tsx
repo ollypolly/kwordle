@@ -4,13 +4,15 @@ import {
   Box,
   Button,
   IconButton,
+  Link,
   TextField,
   Tooltip,
+  Typography,
   useTheme,
 } from "@mui/material";
 import { DarkModeSwitch } from "./components/DarkModeSwitch";
 import { Logo } from "./components/Logo/Logo";
-import gameData from "./data/kwalee-data";
+import gameData from "./data/play-store-data";
 import { Differences, Guess, NumberGuess } from "./model/guess";
 import { GameID } from "./model/games";
 import { useImmer } from "use-immer";
@@ -39,35 +41,41 @@ function App() {
     }
 
     if (selectedGame !== null) {
-      const {
-        file_size,
-        is_publishing,
-        contains_3d_in_name,
-        release_date,
-        review_score,
-      } = gameData[selectedGame];
+      const { downloads, contains_3d_in_name, release_date, review_score } =
+        gameData[selectedGame];
 
       const {
-        file_size: guessFileSize,
-        is_publishing: guessIsPub,
+        downloads: guessDownloadsSize,
         contains_3d_in_name: guessIs3D,
         release_date: guessReleaseDate,
         review_score: guessReview,
       } = gameToGuess;
 
       const numberGuess = (guess: string | number, target: string | number) => {
-        if (guess < target) {
-          return NumberGuess.HIGHER;
-        } else if (guess > target) {
-          return NumberGuess.LOWER;
+        if (typeof guess === "string" && typeof target === "string") {
+          if (guess.localeCompare(target) < 0) {
+            return NumberGuess.HIGHER;
+          } else if (guess.localeCompare(target) > 0) {
+            return NumberGuess.LOWER;
+          }
+        } else {
+          if (guess < target) {
+            return NumberGuess.HIGHER;
+          } else if (guess > target) {
+            return NumberGuess.LOWER;
+          }
         }
+
         return NumberGuess.EQUAL;
       };
 
       // Calculate differences
       const differences: Differences = {
-        file_size: numberGuess(file_size, guessFileSize),
-        is_publishing: is_publishing === guessIsPub,
+        downloads: numberGuess(downloads, guessDownloadsSize),
+        alphabetical: numberGuess(
+          gameNameToGuess.charAt(0),
+          selectedGame.charAt(0)
+        ),
         contains_3d_in_name: contains_3d_in_name === guessIs3D,
         release_date: numberGuess(release_date, guessReleaseDate),
         review_score: numberGuess(review_score, guessReview),
@@ -129,8 +137,31 @@ function App() {
         >
           <Box>
             {Array.from(Array(GUESS_LIMIT).keys()).map((index) => (
-              <GuessRow index={index} guess={guesses[index]} key={index} />
+              <GuessRow
+                gameToGuess={gameToGuess}
+                index={index}
+                guess={guesses[index]}
+                key={index}
+              />
             ))}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                margin: theme.spacing(2),
+              }}
+            >
+              <Typography variant="subtitle2">
+                Need a hint? Check out{" "}
+                <Link
+                  target="_blank"
+                  href="https://play.google.com/store/apps/collection/cluster?clp=igM4ChkKEzUwOTU0OTAzODk2ODY1MjkyMTkQCBgDEhkKEzUwOTU0OTAzODk2ODY1MjkyMTkQCBgDGAA%3D:S:ANO1ljIziXY&gsr=CjuKAzgKGQoTNTA5NTQ5MDM4OTY4NjUyOTIxORAIGAMSGQoTNTA5NTQ5MDM4OTY4NjUyOTIxORAIGAMYAA%3D%3D:S:ANO1ljJbroU&hl=en_GB&gl=US"
+                >
+                  Kwalee
+                </Link>{" "}
+                on the Google Play Store
+              </Typography>
+            </Box>
           </Box>
         </Box>
 

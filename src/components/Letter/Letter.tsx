@@ -1,4 +1,12 @@
-import { Box, Tooltip, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Tooltip,
+  TooltipProps,
+  tooltipClasses,
+  Typography,
+  useTheme,
+  styled,
+} from "@mui/material";
 import React, { PropsWithChildren } from "react";
 
 type LetterProps = {
@@ -9,6 +17,17 @@ type LetterProps = {
   color?: string;
   isText?: boolean;
 } & PropsWithChildren<any>;
+
+const BootstrapTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} arrow classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.arrow}`]: {
+    color: theme.palette.common.black,
+  },
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: theme.palette.common.black,
+  },
+}));
 
 export function Letter({
   backgroundColor,
@@ -22,7 +41,7 @@ export function Letter({
   const theme = useTheme();
 
   return (
-    <Tooltip title={tooltipTitle}>
+    <BootstrapTooltip enterTouchDelay={50} title={tooltipTitle} arrow>
       <Box
         sx={{
           display: "flex",
@@ -65,6 +84,6 @@ export function Letter({
           <Box sx={{ borderRadius: "6px" }}>{children}</Box>
         )}
       </Box>
-    </Tooltip>
+    </BootstrapTooltip>
   );
 }

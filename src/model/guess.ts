@@ -4,10 +4,10 @@ export type Guess = {
 } & Differences;
 
 export type Differences = {
-  file_size: NumberGuess;
+  downloads: NumberGuess;
   release_date: NumberGuess;
   contains_3d_in_name: boolean;
-  is_publishing: boolean;
+  alphabetical: NumberGuess;
   review_score: NumberGuess;
 };
 
