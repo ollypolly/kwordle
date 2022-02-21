@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { DarkModeSwitch } from "./components/DarkModeSwitch";
 import { Logo } from "./components/Logo/Logo";
-import gameData from "./data/kwalee-data";
+import gameData from "./data/play-store-data";
 import { Differences, Guess, NumberGuess } from "./model/guess";
 import { GameID } from "./model/games";
 import { useImmer } from "use-immer";
@@ -39,17 +39,11 @@ function App() {
     }
 
     if (selectedGame !== null) {
-      const {
-        file_size,
-        is_publishing,
-        contains_3d_in_name,
-        release_date,
-        review_score,
-      } = gameData[selectedGame];
+      const { downloads, contains_3d_in_name, release_date, review_score } =
+        gameData[selectedGame];
 
       const {
-        file_size: guessFileSize,
-        is_publishing: guessIsPub,
+        downloads: guessDownloadsSize,
         contains_3d_in_name: guessIs3D,
         release_date: guessReleaseDate,
         review_score: guessReview,
@@ -66,8 +60,7 @@ function App() {
 
       // Calculate differences
       const differences: Differences = {
-        file_size: numberGuess(file_size, guessFileSize),
-        is_publishing: is_publishing === guessIsPub,
+        downloads: numberGuess(downloads, guessDownloadsSize),
         contains_3d_in_name: contains_3d_in_name === guessIs3D,
         release_date: numberGuess(release_date, guessReleaseDate),
         review_score: numberGuess(review_score, guessReview),
