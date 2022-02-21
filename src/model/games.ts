@@ -17,5 +17,5 @@ export const GuessMetrics: Record<string, string> = {
   downloads: "Downloads",
   contains_3d_in_name: "3D in name",
   alphabetical: "Alphabetical",
-  review_score: "iOS score",
+  review_score: "Review score",
 };

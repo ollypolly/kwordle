@@ -2,12 +2,11 @@ import { Box, Typography, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import gameData from "../data/play-store-data";
 import { GameAttributes, GuessMetrics } from "../model/games";
-import { Differences, Guess, NumberGuess } from "../model/guess";
+import { Guess, NumberGuess } from "../model/guess";
 import { Letter } from "./Letter/Letter";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Flippable } from "./Letter/Flippable";
-import moment from "moment";
 
 export type GuessRowProps = {
   index: number;
@@ -87,20 +86,38 @@ export function GuessRow({ guess, index }: GuessRowProps) {
             tooltipVal = "The correct answer does not align with your answer";
           }
           if (tooltipVal) {
-            if (key === "file_size") {
-              tooltipVal = `${tooltipVal} MB`;
-            } else if (key === "downloads") {
-              tooltipVal = `${tooltipVal
+            if (key === "downloads" || key === "review_score") {
+              let prefix =
+                guessCorrectness === NumberGuess.EQUAL
+                  ? "Equal to"
+                  : guessCorrectness === NumberGuess.HIGHER
+                  ? "More than"
+                  : "Less than";
+              tooltipVal = `${prefix} ${tooltipVal
                 .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}+`;
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+            }
+
+            if (key === "release_date") {
+              let prefix =
+                guessCorrectness === NumberGuess.EQUAL
+                  ? "Released on"
+                  : guessCorrectness === NumberGuess.HIGHER
+                  ? "Released after"
+                  : "Released before";
+
+              tooltipVal = `${prefix} ${tooltipVal}`;
             }
           }
 
           if (key === "alphabetical") {
             let prefix =
-              guessCorrectness === NumberGuess.HIGHER
+              guessCorrectness === NumberGuess.EQUAL
+                ? "Equal in the alphabet to"
+                : guessCorrectness === NumberGuess.HIGHER
                 ? "Higher in the alphabet than"
                 : "Lower in the alphabet than";
+
             tooltipVal = `${prefix} ${guess?.name.charAt(0)}`;
           }
 
