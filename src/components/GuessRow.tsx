@@ -1,5 +1,5 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import gameData from "../data/kwalee-data";
 import { GuessMetrics } from "../model/games";
 import { Differences, Guess, NumberGuess } from "../model/guess";
@@ -16,6 +16,20 @@ export type GuessRowProps = {
 
 export function GuessRow({ guess, index }: GuessRowProps) {
   const theme = useTheme();
+
+  const [flipIndex, setFlipIndex] = useState<number | undefined>();
+
+  useEffect(() => {
+    const flipGuess = async () => {
+      for (const i of Array.from(Array(6).keys())) {
+        await setTimeout(() => setFlipIndex(i), i * 200);
+      }
+    };
+
+    if (guess) {
+      flipGuess();
+    }
+  }, [guess]);
 
   return (
     <>
@@ -58,7 +72,7 @@ export function GuessRow({ guess, index }: GuessRowProps) {
       <Box
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
-        {Object.entries(GuessMetrics).map(([key, value], index) => {
+        {Object.entries(GuessMetrics).map(([key, value], guessIndex) => {
           const guessKey = key as keyof Differences;
           let guessValue =
             guess && gameData[guess.name] && gameData[guess.name][guessKey];
@@ -121,7 +135,10 @@ export function GuessRow({ guess, index }: GuessRowProps) {
           }
 
           return (
-            <Flippable key={index} startFlip={!!guess}>
+            <Flippable
+              key={guessIndex}
+              startFlip={flipIndex !== undefined && flipIndex >= guessIndex}
+            >
               <Box sx={{ width: "60px", height: "60px" }} className="back">
                 <Letter
                   tooltipTitle={tooltipVal}
