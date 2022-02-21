@@ -1,6 +1,5 @@
 import { Box, useTheme } from "@mui/material";
 import React from "react";
-import { Flippable } from "../Letter/Flippable";
 import { Letter } from "../Letter/Letter";
 
 export function Logo() {
