@@ -27,20 +27,13 @@ export function GuessRow({ guess, index }: GuessRowProps) {
             alignItems: "center",
           }}
         >
-          {/* <Typography
-            variant="subtitle1"
-            sx={{ width: "140px", textAlign: "center", fontSize: "0.7rem" }}
-          >
-            Name
-          </Typography> */}
-
           {Object.entries(GuessMetrics).map(([key, value], index) => (
             <Box
               key={key}
               sx={{
                 display: "flex",
                 justifyContent: "center",
-                alignContent: "center",
+                alignItems: "center",
                 flexGrow: 0,
                 margin: theme.spacing(0.5),
                 width: "60px",
@@ -65,13 +58,6 @@ export function GuessRow({ guess, index }: GuessRowProps) {
       <Box
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
-        {/* <Typography
-          variant="body1"
-          sx={{ width: "140px", textAlign: "center", fontSize: "0.9rem" }}
-        >
-          {guess?.name}
-        </Typography> */}
-
         {Object.entries(GuessMetrics).map(([key, value], index) => {
           const guessKey = key as keyof Differences;
           let guessValue =

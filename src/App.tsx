@@ -33,8 +33,6 @@ function App() {
     a.localeCompare(b)
   );
 
-  console.log(guesses);
-
   const addGuess = () => {
     if (guesses.length >= GUESS_LIMIT) {
       return;
