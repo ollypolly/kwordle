@@ -11,9 +11,10 @@ import { Flippable } from "./Letter/Flippable";
 export type GuessRowProps = {
   index: number;
   guess?: Guess;
+  gameToGuess?: GameAttributes;
 };
 
-export function GuessRow({ guess, index }: GuessRowProps) {
+export function GuessRow({ guess, index, gameToGuess }: GuessRowProps) {
   const theme = useTheme();
 
   const [flipIndex, setFlipIndex] = useState<number | undefined>();
@@ -81,9 +82,17 @@ export function GuessRow({ guess, index }: GuessRowProps) {
           const guessCorrectness = guess && guess[guessKey];
 
           if (guessCorrectness === true) {
-            tooltipVal = "Your guess aligns with the correct answer";
+            if (guess?.name.includes("3D")) {
+              tooltipVal = "Answer and guess include 3D in the name";
+            } else {
+              tooltipVal = "Answer and guess don't include 3D in the name";
+            }
           } else if (guessCorrectness === false) {
-            tooltipVal = "The correct answer does not align with your answer";
+            if (gameToGuess?.name.includes("3D")) {
+              tooltipVal = "Answer includes 3D in the name";
+            } else {
+              tooltipVal = "Answer doesn't include 3D in the name";
+            }
           }
           if (tooltipVal) {
             if (key === "downloads" || key === "review_score") {
@@ -128,9 +137,9 @@ export function GuessRow({ guess, index }: GuessRowProps) {
             guessCorrectness === true ||
             guessCorrectness === NumberGuess.EQUAL
           ) {
-            color = "#418154";
+            color = "#41a05e";
           } else if (guessCorrectness === false) {
-            color = "#883434";
+            color = "#9e3232";
           }
 
           if (guessCorrectness === NumberGuess.HIGHER) {
@@ -159,7 +168,7 @@ export function GuessRow({ guess, index }: GuessRowProps) {
           }
 
           if (Icon) {
-            color = "#3859a0";
+            color = "#2d55ac";
           }
 
           return (
