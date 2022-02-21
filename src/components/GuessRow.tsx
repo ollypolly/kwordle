@@ -7,6 +7,7 @@ import { Letter } from "./Letter/Letter";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Flippable } from "./Letter/Flippable";
+import moment from "moment";
 
 export type GuessRowProps = {
   index: number;
@@ -83,6 +84,12 @@ export function GuessRow({ guess, index }: GuessRowProps) {
             tooltipVal = "Both your guess, and the correct answer align";
           } else if (guessCorrectness === false) {
             tooltipVal = "The correct answer does not align with your answer";
+          }
+
+          if (key === "release_date") {
+            tooltipVal = moment(tooltipVal?.toString()).format("MMM Do YYYY");
+          } else if (key === "file_size") {
+            tooltipVal = `${tooltipVal} MB`;
           }
 
           let color = "#424242";

@@ -13,6 +13,7 @@ export function Logo() {
     >
       {logoLetters.map((letter, index) => (
         <Letter
+          key={index}
           className="back"
           isLogo={true}
           backgroundColor={theme.palette.primary.main}
