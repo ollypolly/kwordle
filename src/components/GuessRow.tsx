@@ -71,13 +71,12 @@ export function GuessRow({ guess, index }: GuessRowProps) {
           } else if (guessCorrectness === false) {
             tooltipVal = "The correct answer does not align with your answer";
           }
-
-          if (key === "release_date") {
-            if (tooltipVal) {
+          if (tooltipVal) {
+            if (key === "release_date") {
               tooltipVal = moment(tooltipVal?.toString()).format("MMM Do YYYY");
+            } else if (key === "file_size") {
+              tooltipVal = `${tooltipVal} MB`;
             }
-          } else if (key === "file_size") {
-            tooltipVal = `${tooltipVal} MB`;
           }
 
           let color = "#424242";
