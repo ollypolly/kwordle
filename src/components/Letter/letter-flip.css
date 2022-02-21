@@ -3,8 +3,8 @@
   perspective: 1000;
 }
 /* flip the pane when hovered */
-.flip-container:hover .flipper,
-.flip-container.hover .flipper {
+
+.flip-container.flip-this .flipper {
   transform: rotateX(180deg);
 }
 
