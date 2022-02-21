@@ -23,7 +23,7 @@ export const lightTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#3f51b5",
+      main: "#ffcb05",
     },
     secondary: {
       main: "#f50057",
@@ -43,14 +43,14 @@ export const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#3f51b5",
+      main: "#ffcb05",
     },
     secondary: {
       main: "#f50057",
     },
     background: {
-      default: "#1c2035",
-      paper: "#2d3956",
+      default: "#131313",
+      paper: "#433f2f",
     },
     text: {
       primary: "rgba(255,255,255,0.87)",
