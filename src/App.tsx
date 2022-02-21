@@ -7,19 +7,18 @@ import {
   IconButton,
   TextField,
   Tooltip,
-  Typography,
   useTheme,
 } from "@mui/material";
 import { DarkModeSwitch } from "./components/DarkModeSwitch";
 import { Logo } from "./components/Logo/Logo";
 import gameData from "./data/kwalee-data";
 import { Differences, Guess, NumberGuess } from "./model/guess";
-import { GameID, GuessMetrics } from "./model/games";
+import { GameID } from "./model/games";
 import { useImmer } from "use-immer";
 import { GuessRow } from "./components/GuessRow";
 import IosShareIcon from "@mui/icons-material/IosShare";
 
-const GUESS_LIMIT = 8;
+const GUESS_LIMIT = 6;
 
 function App() {
   const theme = useTheme();
@@ -88,30 +87,53 @@ function App() {
   };
 
   return (
-    <Box component="main" sx={{ maxWidth: "1100px", margin: "auto" }}>
+    <Box component="main">
       <Box
         component="header"
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          padding: theme.spacing(2),
+          padding: theme.spacing(1),
           marginBottom: theme.spacing(2),
           borderBottom: `2px ${theme.palette.background.paper} solid`,
         }}
       >
-        <DarkModeSwitch />
+        <Box sx={{ width: "100px", display: "flex", justifyContent: "center" }}>
+          <DarkModeSwitch />
+        </Box>
         <Logo />
-        <Tooltip title="Share your answer">
-          <IconButton>
-            <IosShareIcon />
-          </IconButton>
-        </Tooltip>
+        <Box sx={{ width: "100px", display: "flex", justifyContent: "center" }}>
+          <Tooltip title="Share your answer">
+            <IconButton sx={{ alignSelf: "center" }}>
+              <IosShareIcon />
+            </IconButton>
+          </Tooltip>
+        </Box>
       </Box>
 
-      <Box component="section">
-        {Array.from(Array(GUESS_LIMIT).keys()).map((index) => (
-          <GuessRow index={index} guess={guesses[index]} key={index} />
-        ))}
+      <Box
+        component="section"
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          flexDirection: "column",
+          height: "calc(100vh - 100px)",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flexGrow: 1,
+            justifyContent: "center",
+          }}
+        >
+          <Box>
+            {Array.from(Array(GUESS_LIMIT).keys()).map((index) => (
+              <GuessRow index={index} guess={guesses[index]} key={index} />
+            ))}
+          </Box>
+        </Box>
 
         <Box
           sx={{
