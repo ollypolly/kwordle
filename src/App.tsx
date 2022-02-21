@@ -18,6 +18,7 @@ import { GameID } from "./model/games";
 import { useImmer } from "use-immer";
 import { GuessRow } from "./components/GuessRow";
 import IosShareIcon from "@mui/icons-material/IosShare";
+import moment from "moment";
 
 const GUESS_LIMIT = 6;
 
@@ -27,13 +28,42 @@ function App() {
   const [guesses, setGuesses] = useImmer<Guess[]>([]);
   const [selectedGame, setSelectedGame] = useState<GameID | null>(null);
 
-  // Select game of the day to guess
-  const gameNameToGuess = "Jetpack Jump";
-  const gameToGuess = gameData[gameNameToGuess];
-
   const selectOptions = Object.keys(gameData).sort((a, b) =>
     a.localeCompare(b)
   );
+
+  const dayOfYear = (date: Date) =>
+    Math.floor(
+      (date.getTime() - new Date(date.getFullYear(), 0, 0).getTime()) /
+        1000 /
+        60 /
+        60 /
+        24
+    );
+
+  // Select game of the day
+  var output = [];
+  for (var day = 1; day < 365; day++) {
+    output.push(selectOptions[day % selectOptions.length]);
+  }
+  const dayNumber = dayOfYear(new Date());
+
+  // Select game of the day to guess
+  const dailyGame = output[dayNumber];
+  const [gameNameToGuess, setGameNameToGuess] = useState(dailyGame);
+
+  console.log(`Answer: ${gameNameToGuess}`);
+  const gameToGuess = gameData[gameNameToGuess];
+
+  const pickRandom = () => {
+    const random = Math.floor(Math.random() * selectOptions.length);
+
+    // Set random game
+    setGameNameToGuess(selectOptions[random]);
+
+    // Clear guesses
+    setGuesses([]);
+  };
 
   const addGuess = () => {
     if (guesses.length >= GUESS_LIMIT) {
@@ -77,7 +107,10 @@ function App() {
           selectedGame.charAt(0)
         ),
         contains_3d_in_name: contains_3d_in_name === guessIs3D,
-        release_date: numberGuess(release_date, guessReleaseDate),
+        release_date: numberGuess(
+          moment(release_date, "MMM DD, YYYY").unix(),
+          moment(guessReleaseDate, "MMM DD, YYYY").unix()
+        ),
         review_score: numberGuess(review_score, guessReview),
       };
 
@@ -136,6 +169,11 @@ function App() {
           }}
         >
           <Box>
+            <Box sx={{ margin: theme.spacing(2), textAlign: "center" }}>
+              <Typography variant="subtitle2">
+                Game Mode: {gameNameToGuess === dailyGame ? "Daily" : "Random"}
+              </Typography>
+            </Box>
             {Array.from(Array(GUESS_LIMIT).keys()).map((index) => (
               <GuessRow
                 gameToGuess={gameToGuess}
@@ -147,7 +185,9 @@ function App() {
             <Box
               sx={{
                 display: "flex",
+                flexDirection: "column",
                 justifyContent: "center",
+                alignItems: "center",
                 margin: theme.spacing(2),
               }}
             >
@@ -189,6 +229,16 @@ function App() {
           />
           <Button variant="contained" onClick={() => addGuess()}>
             Submit
+          </Button>
+        </Box>
+        <Box sx={{ margin: theme.spacing(2), alignSelf: "center" }}>
+          <Button
+            onClick={() => pickRandom()}
+            color="secondary"
+            size="small"
+            variant="outlined"
+          >
+            New Game
           </Button>
         </Box>
       </Box>
