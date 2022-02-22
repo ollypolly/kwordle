@@ -21,6 +21,7 @@ import { GuessRow } from "./components/GuessRow";
 import IosShareIcon from "@mui/icons-material/IosShare";
 import moment from "moment";
 import { useSnackbar } from "notistack";
+import { Confetti } from "./components/Confetti";
 
 const GUESS_LIMIT = 6;
 
@@ -63,7 +64,7 @@ function App() {
     // Clear guesses
     setGuesses([]);
 
-    enqueueSnackbar("Good luck this time!");
+    enqueueSnackbar("You'll get it this time!");
   };
 
   const pickRandom = () => {
@@ -75,7 +76,7 @@ function App() {
     // Clear guesses
     setGuesses([]);
 
-    enqueueSnackbar("New game started");
+    enqueueSnackbar("Can you guess the Kwalee game?");
   };
 
   // End conditions
@@ -158,6 +159,7 @@ function App() {
 
   return (
     <Box component="main">
+      <Confetti showConfetti={gameWon} />
       <Box
         component="header"
         sx={{
