@@ -263,7 +263,7 @@ function App() {
           }}
         >
           <Box>
-            <Box sx={{ margin: theme.spacing(2), textAlign: "center" }}>
+            <Box sx={{ margin: theme.spacing(1), textAlign: "center" }}>
               <Typography variant="subtitle2">
                 {gameMode === "Daily"
                   ? `Daily Kwordle ${dailyNumber}`
