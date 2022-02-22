@@ -11,7 +11,12 @@ import { Box } from "@mui/material";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Box sx={{ ".SnackbarContainer-top": { marginTop: "4rem" } }}>
+      <Box
+        sx={{
+          ".SnackbarContainer-top": { marginTop: "4rem" },
+          ".SnackbarContent-root": { justifyContent: "center" },
+        }}
+      >
         <SnackbarProvider
           anchorOrigin={{ horizontal: "center", vertical: "top" }}
           maxSnack={3}

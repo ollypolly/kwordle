@@ -9,8 +9,6 @@
 
 /* flip speed goes here */
 .flipper {
-  transform-origin: 100% 30px; /* half of height */
-
   transition: 1s;
   transform-style: preserve-3d;
 
