@@ -6,18 +6,21 @@ import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import { Theme } from "./theme/Theme";
 import { SnackbarProvider } from "notistack";
+import { Box } from "@mui/material";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <SnackbarProvider
-        anchorOrigin={{ horizontal: "center", vertical: "top" }}
-        maxSnack={3}
-      >
-        <Theme>
-          <App />
-        </Theme>
-      </SnackbarProvider>
+      <Box sx={{ ".SnackbarContainer-top": { marginTop: "4rem" } }}>
+        <SnackbarProvider
+          anchorOrigin={{ horizontal: "center", vertical: "top" }}
+          maxSnack={3}
+        >
+          <Theme>
+            <App />
+          </Theme>
+        </SnackbarProvider>
+      </Box>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
