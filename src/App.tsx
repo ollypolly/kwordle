@@ -23,6 +23,7 @@ import moment from "moment";
 import { useSnackbar } from "notistack";
 import { Confetti } from "./components/Confetti";
 import { ContentPaste } from "@mui/icons-material";
+import { shuffle } from "./utils/randomSeed";
 
 const GUESS_LIMIT = 6;
 
@@ -44,9 +45,9 @@ function App() {
   const [guesses, setGuesses] = useImmer<Guess[]>([]);
   const [selectedGame, setSelectedGame] = useState<GameID | null>(null);
 
-  const selectOptions = Object.keys(gameData).sort((a, b) =>
-    a.localeCompare(b)
-  );
+  const gameNames = Object.keys(gameData);
+  const seededGamesArr = shuffle([...gameNames], 44133);
+  const selectOptions = [...gameNames].sort((a, b) => a.localeCompare(b));
 
   const dayOfYear = (date: Date) =>
     Math.floor(
@@ -60,16 +61,20 @@ function App() {
   // Select game of the day
   var output = [];
   for (var day = 1; day < 365; day++) {
-    output.push(selectOptions[day % selectOptions.length]);
+    output.push(seededGamesArr[day % seededGamesArr.length]);
   }
-  const dayNumber = dayOfYear(new Date());
+  const dayOfTheYear = dayOfYear(new Date());
+
+  const launchDate = moment("2022-02-22", "YYYY-MM-DD");
+  const todaysDate = moment().startOf("day");
+  const dailyNumber = launchDate.diff(todaysDate) + 1;
+
+  // Hardcode initial game
+  const firstGame = "Big Battle 3D";
 
   // Select game of the day to guess
-  const dailyGame = output[dayNumber];
+  const dailyGame = dailyNumber === 1 ? firstGame : output[dayOfTheYear];
   const [gameNameToGuess, setGameNameToGuess] = useState(dailyGame);
-
-  const dailyNumber =
-    moment("2022-02-22", "YYYY-MM-DD").diff(moment().startOf("day")) + 1;
 
   const gameToGuess = gameData[gameNameToGuess];
 
