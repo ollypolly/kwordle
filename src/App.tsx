@@ -15,18 +15,29 @@ import { DarkModeSwitch } from "./components/DarkModeSwitch";
 import { Logo } from "./components/Logo/Logo";
 import gameData from "./data/play-store-data";
 import { Differences, Guess, NumberGuess } from "./model/guess";
-import { GameID } from "./model/games";
+import { GameID, GuessMetrics } from "./model/games";
 import { useImmer } from "use-immer";
 import { GuessRow } from "./components/GuessRow";
 import IosShareIcon from "@mui/icons-material/IosShare";
 import moment from "moment";
 import { useSnackbar } from "notistack";
 import { Confetti } from "./components/Confetti";
+import { ContentPaste } from "@mui/icons-material";
 
 const GUESS_LIMIT = 6;
 
 function App() {
   const theme = useTheme();
+
+  useEffect(() => {
+    setTimeout(
+      () => enqueueSnackbar("Can you guess the daily Kwalee game?"),
+      1000
+    );
+
+    console.log(`Daily Kwordle ${dailyNumber}: ${gameNameToGuess}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -57,7 +68,9 @@ function App() {
   const dailyGame = output[dayNumber];
   const [gameNameToGuess, setGameNameToGuess] = useState(dailyGame);
 
-  console.log(`Answer: ${gameNameToGuess}`);
+  const dailyNumber =
+    moment("2022-02-22", "YYYY-MM-DD").diff(moment().startOf("day")) + 1;
+
   const gameToGuess = gameData[gameNameToGuess];
 
   const tryAgain = () => {
@@ -78,6 +91,8 @@ function App() {
 
     enqueueSnackbar("Can you guess the Kwalee game?");
   };
+
+  const gameMode = gameNameToGuess === dailyGame ? "Daily" : "Random";
 
   // End conditions
   const gameWon = guesses.map((guess) => guess.name).includes(gameNameToGuess);
@@ -157,6 +172,53 @@ function App() {
     setSelectedGame(null);
   };
 
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text).then(() => {
+      enqueueSnackbar("Copied to clipboard");
+    });
+  };
+
+  const generateEmojiAnswer = (guesses: Guess[]) => {
+    let emojiAnswer = `${gameMode} Kwordle ${
+      gameMode === "Daily" ? dailyNumber : ""
+    } - ${guesses.length}/6\n\n`;
+    const GuessMetricsKeys = Object.keys(GuessMetrics);
+    for (const guess of guesses) {
+      for (const key of Object.keys(guess).sort(
+        (a, b) => GuessMetricsKeys.indexOf(a) - GuessMetricsKeys.indexOf(b)
+      )) {
+        const value = guess[key as keyof Guess];
+        switch (value) {
+          case NumberGuess.HIGHER:
+            emojiAnswer += "⬆️";
+            break;
+          case NumberGuess.LOWER:
+            emojiAnswer += "⬇️";
+            break;
+          case NumberGuess.EQUAL:
+          case true:
+            emojiAnswer += "🟩";
+            break;
+          case false:
+            emojiAnswer += "🟥";
+            break;
+        }
+      }
+      emojiAnswer += "\n";
+    }
+    return emojiAnswer;
+  };
+
+  const shareUrl = () => {
+    copyToClipboard("https://kwordle.olly.live/");
+  };
+
+  const shareResult = () => {
+    const emojiAnswer = generateEmojiAnswer(guesses);
+
+    copyToClipboard(emojiAnswer);
+  };
+
   return (
     <Box component="main">
       <Confetti showConfetti={gameWon} />
@@ -175,8 +237,8 @@ function App() {
         </Box>
         <Logo />
         <Box sx={{ width: "100px", display: "flex", justifyContent: "center" }}>
-          <Tooltip title="Share your answer">
-            <IconButton sx={{ alignSelf: "center" }}>
+          <Tooltip title="Copy URL">
+            <IconButton onClick={() => shareUrl()} sx={{ alignSelf: "center" }}>
               <IosShareIcon />
             </IconButton>
           </Tooltip>
@@ -201,9 +263,11 @@ function App() {
           }}
         >
           <Box>
-            <Box sx={{ margin: theme.spacing(2), textAlign: "center" }}>
+            <Box sx={{ margin: theme.spacing(1), textAlign: "center" }}>
               <Typography variant="subtitle2">
-                Game Mode: {gameNameToGuess === dailyGame ? "Daily" : "Random"}
+                {gameMode === "Daily"
+                  ? `Daily Kwordle ${dailyNumber}`
+                  : "Random Kwordle"}
               </Typography>
             </Box>
             {Array.from(Array(GUESS_LIMIT).keys()).map((index) => (
@@ -281,6 +345,17 @@ function App() {
               variant="outlined"
             >
               Try Again
+            </Button>
+          )}
+          {gameFinished && (
+            <Button
+              onClick={() => shareResult()}
+              color="primary"
+              size="small"
+              startIcon={<ContentPaste />}
+              variant="outlined"
+            >
+              Copy result
             </Button>
           )}
           <Button
