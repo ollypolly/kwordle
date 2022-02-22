@@ -5,13 +5,19 @@ import { store } from "./app/store";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import { Theme } from "./theme/Theme";
+import { SnackbarProvider } from "notistack";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Theme>
-        <App />
-      </Theme>
+      <SnackbarProvider
+        anchorOrigin={{ horizontal: "center", vertical: "top" }}
+        maxSnack={3}
+      >
+        <Theme>
+          <App />
+        </Theme>
+      </SnackbarProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
