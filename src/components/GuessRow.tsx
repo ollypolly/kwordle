@@ -1,6 +1,6 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import gameData from "../data/play-store-data";
+import gameData from "../data/gameData";
 import { GameAttributes, GuessMetrics } from "../model/games";
 import { Guess, NumberGuess } from "../model/guess";
 import { Letter } from "./Letter/Letter";
@@ -95,7 +95,7 @@ export function GuessRow({ guess, index, gameToGuess }: GuessRowProps) {
               tooltipVal = "Answer doesn't include 3D in the name";
             }
           }
-          if (tooltipVal) {
+          if (tooltipVal !== undefined) {
             if (key === "downloads" || key === "review_score") {
               let prefix =
                 guessCorrectness === NumberGuess.EQUAL
@@ -115,6 +115,10 @@ export function GuessRow({ guess, index, gameToGuess }: GuessRowProps) {
                   : guessCorrectness === NumberGuess.HIGHER
                   ? "Released after"
                   : "Released before";
+
+              if (guess?.name === "Stalactite 3") {
+                prefix = "Will be released in";
+              }
 
               tooltipVal = `${prefix} ${tooltipVal}`;
             }
