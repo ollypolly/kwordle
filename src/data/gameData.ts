@@ -1,7 +1,9 @@
 import { GamesObject } from "../model/games";
 
 const today = new Date();
-export const nextQuarter = Math.floor((today.getMonth() + 3) / 3) + 1;
+const quarter = Math.floor((today.getMonth() + 3) / 3);
+
+export const nextQuarter = quarter >= 4 ? 1 : quarter + 1;
 
 const gameData: GamesObject = {
   "Airport Security": {
