@@ -125,8 +125,8 @@ export function GuessRow({ guess, index, gameToGuess }: GuessRowProps) {
               guessCorrectness === NumberGuess.EQUAL
                 ? "Starts with"
                 : guessCorrectness === NumberGuess.HIGHER
-                ? "Higher in the alphabet than"
-                : "Lower in the alphabet than";
+                ? "Earlier in the alphabet than"
+                : "Later in the alphabet than";
 
             tooltipVal = `${prefix} ${guess?.name.charAt(0)}`;
           }
