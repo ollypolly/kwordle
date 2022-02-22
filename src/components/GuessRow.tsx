@@ -116,7 +116,10 @@ export function GuessRow({ guess, index, gameToGuess }: GuessRowProps) {
                   ? "Released after"
                   : "Released before";
 
-              if (guess?.name === "Stalactite 3") {
+              if (
+                guess?.name === "Stalactite 3" &&
+                gameToGuess?.name === "Stalactite 3"
+              ) {
                 prefix = "Will be released in";
               }
 
