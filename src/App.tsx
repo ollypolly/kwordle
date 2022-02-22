@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Autocomplete,
   Box,
   Button,
   IconButton,
   Link,
+  Stack,
   TextField,
   Tooltip,
   Typography,
@@ -19,11 +20,14 @@ import { useImmer } from "use-immer";
 import { GuessRow } from "./components/GuessRow";
 import IosShareIcon from "@mui/icons-material/IosShare";
 import moment from "moment";
+import { useSnackbar } from "notistack";
 
 const GUESS_LIMIT = 6;
 
 function App() {
   const theme = useTheme();
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const [guesses, setGuesses] = useImmer<Guess[]>([]);
   const [selectedGame, setSelectedGame] = useState<GameID | null>(null);
@@ -55,6 +59,13 @@ function App() {
   console.log(`Answer: ${gameNameToGuess}`);
   const gameToGuess = gameData[gameNameToGuess];
 
+  const tryAgain = () => {
+    // Clear guesses
+    setGuesses([]);
+
+    enqueueSnackbar("Good luck this time!");
+  };
+
   const pickRandom = () => {
     const random = Math.floor(Math.random() * selectOptions.length);
 
@@ -63,7 +74,26 @@ function App() {
 
     // Clear guesses
     setGuesses([]);
+
+    enqueueSnackbar("New game started");
   };
+
+  // End conditions
+  const gameWon = guesses.map((guess) => guess.name).includes(gameNameToGuess);
+
+  const gameLost = guesses.length >= GUESS_LIMIT;
+
+  const gameFinished = gameWon || gameLost;
+
+  useEffect(() => {
+    if (gameFinished) {
+      if (gameWon) {
+        enqueueSnackbar("Congratulations, you know Kwalee!");
+      } else if (gameLost) {
+        enqueueSnackbar("Out of guesses, guess you havn't played our games...");
+      }
+    }
+  }, [enqueueSnackbar, gameFinished, gameLost, gameWon]);
 
   const addGuess = () => {
     if (guesses.length >= GUESS_LIMIT) {
@@ -218,6 +248,7 @@ function App() {
             id="combo-box-demo"
             value={selectedGame}
             options={selectOptions}
+            disabled={gameFinished}
             onChange={(event, newValue) => setSelectedGame(newValue)}
             sx={{ width: 300, marginRight: theme.spacing(1) }}
             renderInput={(params) => <TextField {...params} label="Game" />}
@@ -227,11 +258,29 @@ function App() {
               }
             }}
           />
-          <Button variant="contained" onClick={() => addGuess()}>
+          <Button
+            disabled={gameFinished}
+            variant="contained"
+            onClick={() => addGuess()}
+          >
             Submit
           </Button>
         </Box>
-        <Box sx={{ margin: theme.spacing(2), alignSelf: "center" }}>
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{ margin: theme.spacing(2), alignSelf: "center" }}
+        >
+          {gameLost && (
+            <Button
+              onClick={() => tryAgain()}
+              color="primary"
+              size="small"
+              variant="outlined"
+            >
+              Try Again
+            </Button>
+          )}
           <Button
             onClick={() => pickRandom()}
             color="secondary"
@@ -240,7 +289,7 @@ function App() {
           >
             New Game
           </Button>
-        </Box>
+        </Stack>
       </Box>
     </Box>
   );
