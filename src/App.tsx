@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { DarkModeSwitch } from "./components/DarkModeSwitch";
 import { Logo } from "./components/Logo/Logo";
-import gameData from "./data/play-store-data";
+import gameData, { nextQuarter } from "./data/gameData";
 import { Differences, Guess, NumberGuess } from "./model/guess";
 import { GameID, GuessMetrics } from "./model/games";
 import { useImmer } from "use-immer";
@@ -46,7 +46,7 @@ function App() {
   const [selectedGame, setSelectedGame] = useState<GameID | null>(null);
 
   const gameNames = Object.keys(gameData);
-  const seededGamesArr = shuffle([...gameNames], 44133);
+  const seededGamesArr = shuffle([...gameNames], 34133);
   const selectOptions = [...gameNames].sort((a, b) => a.localeCompare(b));
 
   const dayOfYear = (date: Date) =>
@@ -86,15 +86,18 @@ function App() {
   };
 
   const pickRandom = () => {
-    const random = Math.floor(Math.random() * selectOptions.length);
+    const random = Math.floor(Math.random() * gameNames.length);
 
+    const newGame = selectOptions[random];
     // Set random game
-    setGameNameToGuess(selectOptions[random]);
+    setGameNameToGuess(newGame);
 
     // Clear guesses
     setGuesses([]);
 
     enqueueSnackbar("Can you guess the Kwalee game?");
+
+    console.log(`Random Kwordle: ${newGame}`);
   };
 
   const gameMode = gameNameToGuess === dailyGame ? "Daily" : "Random";
@@ -122,8 +125,9 @@ function App() {
     }
 
     if (selectedGame !== null) {
+      const selectGameInfo = gameData[selectedGame];
       const { downloads, contains_3d_in_name, release_date, review_score } =
-        gameData[selectedGame];
+        selectGameInfo;
 
       const {
         downloads: guessDownloadsSize,
@@ -150,6 +154,22 @@ function App() {
         return NumberGuess.EQUAL;
       };
 
+      let guessReleaseDateMs = moment(guessReleaseDate, "MMM DD, YYYY").unix();
+      let releaseDateMs = moment(release_date, "MMM DD, YYYY").unix();
+
+      const monthFromQuarter = (quarter: number) =>
+        Math.ceil((quarter - 1) * 3 + 3);
+      const today = new Date();
+      // If guess or answer is Stalactite 3, convert Quarter Year to moment ms
+      const stalactiteRelease = `${monthFromQuarter(
+        nextQuarter
+      )} ${today.getFullYear()}`;
+      if (gameToGuess.name === "Stalactite 3") {
+        guessReleaseDateMs = moment(stalactiteRelease, "M, YYYY").unix();
+      } else if (selectGameInfo.name === "Stalactite 3") {
+        releaseDateMs = moment(stalactiteRelease, "M, YYYY").unix();
+      }
+
       // Calculate differences
       const differences: Differences = {
         downloads: numberGuess(downloads, guessDownloadsSize),
@@ -158,10 +178,7 @@ function App() {
           selectedGame.charAt(0)
         ),
         contains_3d_in_name: contains_3d_in_name === guessIs3D,
-        release_date: numberGuess(
-          moment(release_date, "MMM DD, YYYY").unix(),
-          moment(guessReleaseDate, "MMM DD, YYYY").unix()
-        ),
+        release_date: numberGuess(releaseDateMs, guessReleaseDateMs),
         review_score: numberGuess(review_score, guessReview),
       };
 

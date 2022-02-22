@@ -27,14 +27,14 @@ playStore
           )?.icon ?? "",
       }));
 
-      let dataObj = {};
+      let games = {};
 
       for (const item of mergedArr) {
-        dataObj[item.name] = item;
+        games[item.name] = item;
       }
 
-      dataObj = JSON.stringify(dataObj);
+      games = JSON.stringify(games);
 
-      fs.writeFileSync("play-store-data.json", dataObj);
+      fs.writeFileSync("play-store-data.json", games);
     });
   });

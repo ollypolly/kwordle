@@ -1,5 +1,8 @@
 import { GamesObject } from "../model/games";
 
+const today = new Date();
+export const nextQuarter = Math.floor((today.getMonth() + 3) / 3) + 1;
+
 const gameData: GamesObject = {
   "Airport Security": {
     name: "Airport Security",
@@ -401,6 +404,19 @@ const gameData: GamesObject = {
     review_score: "3.9",
     icon: "",
   },
+};
+
+const release_date = `Q${nextQuarter} ${today.getFullYear()}`;
+
+// Add Stalactite 3
+const name = "Stalactite 3";
+gameData[name] = {
+  name,
+  downloads: 0,
+  release_date,
+  contains_3d_in_name: false,
+  review_score: "5",
+  icon: "https://emoji.slack-edge.com/TC1EC9684/michael2/1692ea688e0ad9ac.png",
 };
 
 export default gameData;
