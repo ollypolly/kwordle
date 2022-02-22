@@ -8,6 +8,7 @@ const canvasStyles = {
   height: "100%",
   top: 0,
   left: 0,
+  zIndex: 3,
 };
 
 function getAnimationSettings(angle: number, originX: number) {
