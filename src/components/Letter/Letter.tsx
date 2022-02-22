@@ -47,7 +47,6 @@ export function Letter({
           display: "flex",
           justifyContent: "center",
           flexGrow: 0,
-
           width: "60px",
           height: "60px",
           backgroundColor: backgroundColor,
@@ -74,6 +73,7 @@ export function Letter({
               color,
               ...(isLogo && {
                 fontSize: "1rem",
+                transform: "rotate(180deg)",
               }),
             }}
             variant="body1"

@@ -201,7 +201,7 @@ export function GuessRow({ guess, index, gameToGuess }: GuessRowProps) {
                 guess && flipIndex !== undefined && flipIndex >= guessIndex
               }
             >
-              <Box sx={{ width: "60px", height: "60px" }} className="back">
+              <Box className="back">
                 <Letter
                   tooltipTitle={tooltipVal}
                   backgroundColor={guess ? color : "#7979795e"}
@@ -219,7 +219,7 @@ export function GuessRow({ guess, index, gameToGuess }: GuessRowProps) {
                   )}
                 </Letter>
               </Box>
-              <Box sx={{ width: "60px", height: "60px" }} className="front">
+              <Box className="front">
                 <Letter tooltipTitle={tooltipVal} borderColor={"#a5a5a55e"} />
               </Box>
             </Flippable>
