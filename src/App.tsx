@@ -67,7 +67,7 @@ function App() {
 
   const launchDate = moment("2022-02-22", "YYYY-MM-DD");
   const todaysDate = moment().startOf("day");
-  const dailyNumber = launchDate.diff(todaysDate) + 1;
+  const dailyNumber = todaysDate.diff(launchDate, "days") + 1;
 
   // Hardcode initial game
   const firstGame = "Big Battle 3D";
