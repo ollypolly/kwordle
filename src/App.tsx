@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { DarkModeSwitch } from "./components/DarkModeSwitch";
 import { Logo } from "./components/Logo/Logo";
-import gameData, { nextQuarter } from "./data/gameData";
+import gameData, { nextQuarter, stalactiteYear } from "./data/gameData";
 import { Differences, Guess, NumberGuess } from "./model/guess";
 import { GameID, GuessMetrics } from "./model/games";
 import { useImmer } from "use-immer";
@@ -159,11 +159,10 @@ function App() {
 
       const monthFromQuarter = (quarter: number) =>
         Math.ceil((quarter - 1) * 3 + 3);
-      const today = new Date();
       // If guess or answer is Stalactite 3, convert Quarter Year to moment ms
       const stalactiteRelease = `${monthFromQuarter(
         nextQuarter
-      )} ${today.getFullYear()}`;
+      )} ${stalactiteYear}`;
       if (gameToGuess.name === "Stalactite 3") {
         guessReleaseDateMs = moment(stalactiteRelease, "M, YYYY").unix();
       } else if (selectGameInfo.name === "Stalactite 3") {

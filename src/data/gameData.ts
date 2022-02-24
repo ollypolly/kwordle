@@ -5,6 +5,10 @@ const quarter = Math.floor((today.getMonth() + 3) / 3);
 
 export const nextQuarter = quarter >= 4 ? 1 : quarter + 1;
 
+const nextYear = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
+export const stalactiteYear =
+  quarter >= 4 ? nextYear.getFullYear() : today.getFullYear();
+
 const gameData: GamesObject = {
   "Airport Security": {
     name: "Airport Security",
@@ -408,10 +412,9 @@ const gameData: GamesObject = {
   },
 };
 
-const release_date = `Q${nextQuarter} ${today.getFullYear()}`;
-
 // Add Stalactite 3
 const name = "Stalactite 3";
+const release_date = `Q${nextQuarter} ${stalactiteYear}`;
 gameData[name] = {
   name,
   downloads: 0,
