@@ -105,7 +105,7 @@ function App() {
   // End conditions
   const gameWon = guesses.map((guess) => guess.name).includes(gameNameToGuess);
 
-  const gameLost = guesses.length >= GUESS_LIMIT;
+  const gameLost = guesses.length >= GUESS_LIMIT && !gameWon;
 
   const gameFinished = gameWon || gameLost;
 
